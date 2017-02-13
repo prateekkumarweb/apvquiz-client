@@ -76,7 +76,7 @@ void FirstWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         FirstWindow *_t = static_cast<FirstWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: break;//_t->on_pushButton_2_clicked(); break;
+        //case 0: _t->on_pushButton_2_clicked(); break;
         case 1: _t->on_loginPushButton_clicked(); break;
         case 2: _t->on_signUpPushButton_clicked(); break;
         default: ;

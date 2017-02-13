@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>868</width>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -100,6 +100,23 @@
       <width>221</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>320</y>
+      <width>261</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(52, 101, 164);
+font: 16pt &quot;Ubuntu&quot;;</string>
     </property>
     <property name="text">
      <string/>

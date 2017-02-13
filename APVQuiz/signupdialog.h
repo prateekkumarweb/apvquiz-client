@@ -2,7 +2,7 @@
 #define SIGNUPDIALOG_H
 
 #include <QDialog>
-
+#include "mainwindow.h"
 namespace Ui {
 class SignUpDialog;
 }
@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::SignUpDialog *ui;
+    Mainwindow *mw;
 };
 
 #endif // SIGNUPDIALOG_H

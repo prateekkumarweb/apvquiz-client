@@ -64,6 +64,7 @@ public:
 
         passwordLineEdit = new QLineEdit(formLayoutWidget);
         passwordLineEdit->setObjectName(QStringLiteral("passwordLineEdit"));
+        passwordLineEdit->setEchoMode(QLineEdit::Password);
 
         formLayout->setWidget(2, QFormLayout::FieldRole, passwordLineEdit);
 
@@ -74,6 +75,7 @@ public:
 
         confirPasswordLineEdit = new QLineEdit(formLayoutWidget);
         confirPasswordLineEdit->setObjectName(QStringLiteral("confirPasswordLineEdit"));
+        confirPasswordLineEdit->setEchoMode(QLineEdit::Password);
 
         formLayout->setWidget(3, QFormLayout::FieldRole, confirPasswordLineEdit);
 

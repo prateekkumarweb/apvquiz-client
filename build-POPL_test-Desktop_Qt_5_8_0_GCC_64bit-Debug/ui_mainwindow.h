@@ -35,6 +35,7 @@ public:
     QPushButton *logInPushButton;
     QPushButton *pushButton_2;
     QLabel *offlineLabel;
+    QLabel *label;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -42,7 +43,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(400, 300);
+        MainWindow->resize(868, 540);
         MainWindow->setLayoutDirection(Qt::LeftToRight);
         MainWindow->setAutoFillBackground(true);
         centralWidget = new QWidget(MainWindow);
@@ -68,6 +69,11 @@ public:
         offlineLabel = new QLabel(centralWidget);
         offlineLabel->setObjectName(QStringLiteral("offlineLabel"));
         offlineLabel->setGeometry(QRect(76, 10, 221, 41));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(260, 320, 261, 81));
+        label->setStyleSheet(QLatin1String("border-color: rgb(52, 101, 164);\n"
+"font: 16pt \"Ubuntu\";"));
         MainWindow->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -89,6 +95,7 @@ public:
         logInPushButton->setText(QApplication::translate("MainWindow", "Log in", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Sign up", Q_NULLPTR));
         offlineLabel->setText(QString());
+        label->setText(QString());
     } // retranslateUi
 
 };

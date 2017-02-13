@@ -49,9 +49,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../POPL_test/main.cpp \
-		../POPL_test/mainwindow.cpp moc_mainwindow.cpp
+		../POPL_test/mainwindow.cpp qrc_resource.cpp \
+		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		qrc_resource.o \
 		moc_mainwindow.o
 DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/common/unix.conf \
@@ -203,6 +205,7 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/spec_post.prf \
+		../POPL_test/.qmake.stash \
 		../../../Qt/5.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/toolchain.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -232,7 +235,7 @@ TARGET        = POPL_test
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_dialog.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../POPL_test/POPL_test.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
@@ -385,6 +388,7 @@ Makefile: ../POPL_test/POPL_test.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qm
 		../../../Qt/5.8/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt/5.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/toolchain.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -405,6 +409,7 @@ Makefile: ../POPL_test/POPL_test.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qm
 		../../../Qt/5.8/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/lex.prf \
 		../POPL_test/POPL_test.pro \
+		../POPL_test/resource.qrc \
 		../../../Qt/5.8/gcc_64/lib/libQt5Widgets.prl \
 		../../../Qt/5.8/gcc_64/lib/libQt5Gui.prl \
 		../../../Qt/5.8/gcc_64/lib/libQt5Core.prl
@@ -559,6 +564,7 @@ Makefile: ../POPL_test/POPL_test.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qm
 ../../../Qt/5.8/gcc_64/mkspecs/features/qt_config.prf:
 ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../Qt/5.8/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt/5.8/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt/5.8/gcc_64/mkspecs/features/toolchain.prf:
 ../../../Qt/5.8/gcc_64/mkspecs/features/default_pre.prf:
@@ -579,6 +585,7 @@ Makefile: ../POPL_test/POPL_test.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qm
 ../../../Qt/5.8/gcc_64/mkspecs/features/yacc.prf:
 ../../../Qt/5.8/gcc_64/mkspecs/features/lex.prf:
 ../POPL_test/POPL_test.pro:
+../POPL_test/resource.qrc:
 ../../../Qt/5.8/gcc_64/lib/libQt5Widgets.prl:
 ../../../Qt/5.8/gcc_64/lib/libQt5Gui.prl:
 ../../../Qt/5.8/gcc_64/lib/libQt5Core.prl:
@@ -596,10 +603,11 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../POPL_test/resource.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../POPL_test/mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../POPL_test/main.cpp ../POPL_test/mainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../POPL_test/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../POPL_test/mainwindow.ui ../POPL_test/dialog.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -623,8 +631,15 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resource.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resource.cpp
+qrc_resource.cpp: ../POPL_test/resource.qrc \
+		../../../Qt/5.8/gcc_64/bin/rcc \
+		../POPL_test/quiz_baack.jpeg \
+		../POPL_test/Harry-Potter-Hat.ico
+	/home/vaibhav/Qt/5.8/gcc_64/bin/rcc -name resource ../POPL_test/resource.qrc -o qrc_resource.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -738,6 +753,12 @@ moc_mainwindow.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtouchdevice.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qicon.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QTimer \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDateTime \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/QPixmap \
 		../POPL_test/mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
@@ -745,12 +766,16 @@ moc_mainwindow.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all: ui_mainwindow.h ui_dialog.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
+	-$(DEL_FILE) ui_mainwindow.h ui_dialog.h
 ui_mainwindow.h: ../POPL_test/mainwindow.ui \
 		../../../Qt/5.8/gcc_64/bin/uic
 	/home/vaibhav/Qt/5.8/gcc_64/bin/uic ../POPL_test/mainwindow.ui -o ui_mainwindow.h
+
+ui_dialog.h: ../POPL_test/dialog.ui \
+		../../../Qt/5.8/gcc_64/bin/uic
+	/home/vaibhav/Qt/5.8/gcc_64/bin/uic ../POPL_test/dialog.ui -o ui_dialog.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -758,7 +783,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -867,6 +892,12 @@ main.o: ../POPL_test/main.cpp ../POPL_test/mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtouchdevice.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qicon.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QTimer \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDateTime \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/QPixmap \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qcoreapplication.h \
@@ -981,8 +1012,65 @@ mainwindow.o: ../POPL_test/mainwindow.cpp ../POPL_test/mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtouchdevice.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h
+		../../../Qt/5.8/gcc_64/include/QtCore/QTimer \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDateTime \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/QPixmap \
+		ui_mainwindow.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QVariant \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QAction \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qaction.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QApplication \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qapplication.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qeventloop.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qguiapplication.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qinputmethod.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QButtonGroup \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QHeaderView \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qheaderview.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qframe.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qvalidator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qregularexpression.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qstyle.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QLabel \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QPushButton \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QStatusBar \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QTextEdit \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qtextedit.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qtextdocument.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qtextoption.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qtextcursor.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qtextformat.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qpen.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QToolBar \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qtoolbar.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QWidget \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../POPL_test/mainwindow.cpp
+
+qrc_resource.o: qrc_resource.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resource.o qrc_resource.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

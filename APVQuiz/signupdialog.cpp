@@ -28,6 +28,9 @@ void SignUpDialog::on_pushButton_clicked()
             //Send to server
             //hide();
             //Some stuff ... (Launch main program)
+            hide();
+            mw = new Mainwindow();
+            mw->exec();
         } else{
             QMessageBox::warning(this,"Password Misamtch","The passwords don't match. Please try again");
         }

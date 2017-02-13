@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "signupdialog.h"
+#include "mainwindow.h"
 
 namespace Ui {
 class FirstWindow;
@@ -26,6 +27,7 @@ private slots:
 private:
     Ui::FirstWindow *ui;
     SignUpDialog *sd;
+    Mainwindow *mw;
 };
 
 #endif // FIRSTWINDOW_H

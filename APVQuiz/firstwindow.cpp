@@ -2,7 +2,7 @@
 #include "ui_firstwindow.h"
 #include <QMessageBox>
 
-
+#include <QDebug>
 FirstWindow::FirstWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FirstWindow)
@@ -30,6 +30,10 @@ void FirstWindow::on_loginPushButton_clicked()
         //if( Valid login password){
             //hide();
             //Some Stuff ...(Launch main program)
+            hide();
+            mw = new Mainwindow();
+            mw->exec();
+            //qDebug() << "Here";
         //} else{
         //QMessageBox::Warning(this,"Login Problem","Please check your username and password");
         //}

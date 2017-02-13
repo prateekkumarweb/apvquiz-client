@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QTimer>
+#include <QDateTime>
+#include <QPixmap>
 namespace Ui {
 class MainWindow;
 }
@@ -17,9 +19,12 @@ public:
 
 private slots:
     void on_logInPushButton_clicked();
+    void timermanage();
 
 private:
     Ui::MainWindow *ui;
+    QTimer *timer;
+    QTime *starttime;
 };
 
 #endif // MAINWINDOW_H
