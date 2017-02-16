@@ -1,0 +1,10 @@
+ dpkg-buildpackage -rfakeroot -d -us -uc -S -sd
+dpkg-buildpackage: warning:     debian/changelog(l5): found end of file where expected more change data or trailer
+dpkg-buildpackage: source package appname-1.0
+dpkg-buildpackage: source version 1.0-1
+dpkg-buildpackage: source distribution precise
+dpkg-buildpackage: source changed by 
+ dpkg-source --before-build APVQuiz
+dpkg-source: warning: APVQuiz/debian/changelog(l5): found end of file where expected more change data or trailer
+dpkg-source: error: source package has two conflicting values - appname and appname-1.0
+dpkg-buildpackage: error: dpkg-source --before-build APVQuiz gave error exit status 2

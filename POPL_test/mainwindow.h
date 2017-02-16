@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QPixmap>
+//#include <QNetwork>
 namespace Ui {
 class MainWindow;
 }

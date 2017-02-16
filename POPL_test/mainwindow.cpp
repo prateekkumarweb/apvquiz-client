@@ -3,6 +3,8 @@
 
 #include <QDebug>
 #include <QDateTime>
+#include <QNetworkAccessManager>
+#include <QtNetwork>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -11,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(timermanage()));
     starttime = new QTime(0,0,20);
-    timer->start(1000);
+    //timer->start(1000);
 }
 
 MainWindow::~MainWindow()
@@ -27,6 +29,46 @@ void MainWindow::on_logInPushButton_clicked()
     timer->stop();
     qDebug() << "Time at which login button clicked " << clicktime;
     ui->logInPushButton->setStyleSheet("background-color: rgb(255,0,0);");
+
+   /* QVariantMap top;
+    //qDebug() << ui->usernameTextEdit->text();
+    top.insert( "username" , QString( ui->usernameLabel->text() ) );
+    top.insert( "password", QString( ui->passwordLabel->text() ) );
+    const QJsonDocument doc = QJsonDocument::fromVariant(top);
+    QByteArray postData = doc.toJson();
+
+    qDebug() << doc << postData;*/
+
+    QUrlQuery postData;
+    postData.addQueryItem("username", "prateek");
+    postData.addQueryItem("password", "pass");
+
+    //QNetworkRequest request(serviceUrl);
+    //request.setHeader(QNetworkRequest::ContentTypeHeader,
+    //   "application/x-www-form-urlencoded");
+    //networkManager->post(request, postData.toString(QUrl::FullyEncoded).toUtf8());
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    QNetworkRequest req;
+    req.setUrl(QUrl("http://localhost:8000/login"));
+    req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
+
+    QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
+
+    while(!reply->isFinished())
+    {
+    qApp->processEvents();
+    }
+
+    QByteArray s = reply->readAll();
+
+    QJsonDocument docv = QJsonDocument::fromJson(s);
+    QJsonObject sett2 = docv.object();
+    QJsonValue value = sett2["Auth"];
+    qWarning() << value.toBool();
+
+    //qDebug() << s;
 
 }
 

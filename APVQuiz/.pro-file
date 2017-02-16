@@ -1,0 +1,9 @@
+TARGET = APVQuiz
+target.path = /usr/bin
+INSTALLS += target
+optional: add supplementary files to the installation
+
+data.path = /usr/share/APVQuiz/data
+data.files = data/*
+INSTALLS += data
+
