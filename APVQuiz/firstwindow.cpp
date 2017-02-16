@@ -3,6 +3,8 @@
 #include <QMessageBox>
 
 #include <QDebug>
+#include <QNetworkAccessManager>
+#include <QtNetwork>
 FirstWindow::FirstWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FirstWindow)
@@ -17,26 +19,43 @@ FirstWindow::~FirstWindow()
 
 void FirstWindow::on_loginPushButton_clicked()
 {
+
+    QString username = ui->usernameLineEdit->text();
+    QString password = ui->passwordLineEdit->text();
+    QString ip = ui->iplineEdit->text();
+
     //Check for internet connectivity ...
     //if( Internet connection avaliable){
         //Connect to server
+        QUrlQuery postData;
+        postData.addQueryItem("username", username);
+        postData.addQueryItem("password", password);
 
-        QString username = ui->usernameLineEdit->text();
-        QString password = ui->passwordLineEdit->text();
+        QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-        //Package the username and password
-        //Send to server
-        //Recieve conformation from server
-        //if( Valid login password){
-            //hide();
-            //Some Stuff ...(Launch main program)
+        QNetworkRequest req;
+        req.setUrl(QUrl("http://localhost:8000/login"));
+        req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
+
+        QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
+
+        while(!reply->isFinished())
+        {
+        qApp->processEvents();
+        }
+
+        QByteArray byteReply = reply->readAll();
+
+        QJsonDocument jsonReply = QJsonDocument::fromJson(byteReply);
+        QJsonObject replyObject = jsonReply.object();
+        QJsonValue value = replyObject["Auth"];
+        if( value.toBool() ){
             hide();
             mw = new Mainwindow();
             mw->exec();
-            //qDebug() << "Here";
-        //} else{
-        //QMessageBox::Warning(this,"Login Problem","Please check your username and password");
-        //}
+        } else{
+            QMessageBox::warning(this,"Login Problem","Please check your username and password");
+        }
     //} else{
     //    QMessageBox::warning(this, "Internet Connectivity","Could not connect to network. Please check internet connectivity.");
     //}

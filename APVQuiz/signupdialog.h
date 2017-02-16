@@ -16,7 +16,7 @@ public:
     ~SignUpDialog();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_continuePushButton_clicked();
 
 private:
     Ui::SignUpDialog *ui;

@@ -29,12 +29,14 @@ public:
     QWidget *formLayoutWidget;
     QFormLayout *formLayout;
     QLabel *usernameLabel;
-    QLabel *passwordLabel;
-    QLabel *confirmPasswordLabel;
-    QLineEdit *passwordLineEdit;
     QLineEdit *usernameLineEdit;
+    QLabel *passwordLabel;
+    QLineEdit *passwordLineEdit;
+    QLabel *confirmPasswordLabel;
     QLineEdit *confirPasswordLineEdit;
-    QPushButton *pushButton;
+    QLabel *ipLabel;
+    QPushButton *continuePushButton;
+    QLineEdit *ipLineEdit;
 
     void setupUi(QDialog *SignUpDialog)
     {
@@ -52,15 +54,15 @@ public:
 
         formLayout->setWidget(1, QFormLayout::LabelRole, usernameLabel);
 
+        usernameLineEdit = new QLineEdit(formLayoutWidget);
+        usernameLineEdit->setObjectName(QStringLiteral("usernameLineEdit"));
+
+        formLayout->setWidget(1, QFormLayout::FieldRole, usernameLineEdit);
+
         passwordLabel = new QLabel(formLayoutWidget);
         passwordLabel->setObjectName(QStringLiteral("passwordLabel"));
 
         formLayout->setWidget(2, QFormLayout::LabelRole, passwordLabel);
-
-        confirmPasswordLabel = new QLabel(formLayoutWidget);
-        confirmPasswordLabel->setObjectName(QStringLiteral("confirmPasswordLabel"));
-
-        formLayout->setWidget(3, QFormLayout::LabelRole, confirmPasswordLabel);
 
         passwordLineEdit = new QLineEdit(formLayoutWidget);
         passwordLineEdit->setObjectName(QStringLiteral("passwordLineEdit"));
@@ -68,10 +70,10 @@ public:
 
         formLayout->setWidget(2, QFormLayout::FieldRole, passwordLineEdit);
 
-        usernameLineEdit = new QLineEdit(formLayoutWidget);
-        usernameLineEdit->setObjectName(QStringLiteral("usernameLineEdit"));
+        confirmPasswordLabel = new QLabel(formLayoutWidget);
+        confirmPasswordLabel->setObjectName(QStringLiteral("confirmPasswordLabel"));
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, usernameLineEdit);
+        formLayout->setWidget(3, QFormLayout::LabelRole, confirmPasswordLabel);
 
         confirPasswordLineEdit = new QLineEdit(formLayoutWidget);
         confirPasswordLineEdit->setObjectName(QStringLiteral("confirPasswordLineEdit"));
@@ -79,10 +81,20 @@ public:
 
         formLayout->setWidget(3, QFormLayout::FieldRole, confirPasswordLineEdit);
 
-        pushButton = new QPushButton(formLayoutWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        ipLabel = new QLabel(formLayoutWidget);
+        ipLabel->setObjectName(QStringLiteral("ipLabel"));
 
-        formLayout->setWidget(4, QFormLayout::SpanningRole, pushButton);
+        formLayout->setWidget(4, QFormLayout::LabelRole, ipLabel);
+
+        continuePushButton = new QPushButton(formLayoutWidget);
+        continuePushButton->setObjectName(QStringLiteral("continuePushButton"));
+
+        formLayout->setWidget(6, QFormLayout::SpanningRole, continuePushButton);
+
+        ipLineEdit = new QLineEdit(formLayoutWidget);
+        ipLineEdit->setObjectName(QStringLiteral("ipLineEdit"));
+
+        formLayout->setWidget(4, QFormLayout::FieldRole, ipLineEdit);
 
 #ifndef QT_NO_SHORTCUT
         usernameLabel->setBuddy(usernameLineEdit);
@@ -91,7 +103,8 @@ public:
 #endif // QT_NO_SHORTCUT
         QWidget::setTabOrder(usernameLineEdit, passwordLineEdit);
         QWidget::setTabOrder(passwordLineEdit, confirPasswordLineEdit);
-        QWidget::setTabOrder(confirPasswordLineEdit, pushButton);
+        QWidget::setTabOrder(confirPasswordLineEdit, ipLineEdit);
+        QWidget::setTabOrder(ipLineEdit, continuePushButton);
 
         retranslateUi(SignUpDialog);
 
@@ -104,7 +117,8 @@ public:
         usernameLabel->setText(QApplication::translate("SignUpDialog", "Username", Q_NULLPTR));
         passwordLabel->setText(QApplication::translate("SignUpDialog", "Password", Q_NULLPTR));
         confirmPasswordLabel->setText(QApplication::translate("SignUpDialog", "Confirm Password", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("SignUpDialog", "Continue", Q_NULLPTR));
+        ipLabel->setText(QApplication::translate("SignUpDialog", "Ip", Q_NULLPTR));
+        continuePushButton->setText(QApplication::translate("SignUpDialog", "Continue", Q_NULLPTR));
     } // retranslateUi
 
 };

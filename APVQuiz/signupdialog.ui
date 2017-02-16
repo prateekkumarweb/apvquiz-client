@@ -33,6 +33,9 @@
       </property>
      </widget>
     </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="usernameLineEdit"/>
+    </item>
     <item row="2" column="0">
      <widget class="QLabel" name="passwordLabel">
       <property name="text">
@@ -40,6 +43,13 @@
       </property>
       <property name="buddy">
        <cstring>passwordLineEdit</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="passwordLineEdit">
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
       </property>
      </widget>
     </item>
@@ -53,16 +63,6 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="passwordLineEdit">
-      <property name="echoMode">
-       <enum>QLineEdit::Password</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="usernameLineEdit"/>
-    </item>
     <item row="3" column="1">
      <widget class="QLineEdit" name="confirPasswordLineEdit">
       <property name="echoMode">
@@ -70,12 +70,22 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0" colspan="2">
-     <widget class="QPushButton" name="pushButton">
+    <item row="4" column="0">
+     <widget class="QLabel" name="ipLabel">
+      <property name="text">
+       <string>Ip</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="2">
+     <widget class="QPushButton" name="continuePushButton">
       <property name="text">
        <string>Continue</string>
       </property>
      </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="ipLineEdit"/>
     </item>
    </layout>
   </widget>
@@ -84,7 +94,8 @@
   <tabstop>usernameLineEdit</tabstop>
   <tabstop>passwordLineEdit</tabstop>
   <tabstop>confirPasswordLineEdit</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>ipLineEdit</tabstop>
+  <tabstop>continuePushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

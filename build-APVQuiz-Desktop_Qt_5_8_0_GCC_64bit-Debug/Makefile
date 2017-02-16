@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../APVQuiz -I. -I../../../Qt/5.8/gcc_64/include -I../../../Qt/5.8/gcc_64/include/QtWidgets -I../../../Qt/5.8/gcc_64/include/QtGui -I../../../Qt/5.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../Qt/5.8/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../APVQuiz -I. -I../../../Qt/5.8/gcc_64/include -I../../../Qt/5.8/gcc_64/include/QtWidgets -I../../../Qt/5.8/gcc_64/include/QtGui -I../../../Qt/5.8/gcc_64/include/QtNetwork -I../../../Qt/5.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../Qt/5.8/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/vaibhav/Qt/5.8/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = APVQuiz1.0.0
 DISTDIR = /home/vaibhav/Projects/apvquiz-client/build-APVQuiz-Desktop_Qt_5_8_0_GCC_64bit-Debug/.tmp/APVQuiz1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/vaibhav/Qt/5.8/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/home/vaibhav/Qt/5.8/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/vaibhav/Qt/5.8/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Network -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -424,6 +424,7 @@ Makefile: ../APVQuiz/APVQuiz.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.
 		../APVQuiz/resource.qrc \
 		../../../Qt/5.8/gcc_64/lib/libQt5Widgets.prl \
 		../../../Qt/5.8/gcc_64/lib/libQt5Gui.prl \
+		../../../Qt/5.8/gcc_64/lib/libQt5Network.prl \
 		../../../Qt/5.8/gcc_64/lib/libQt5Core.prl
 	$(QMAKE) -o Makefile ../APVQuiz/APVQuiz.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf:
@@ -600,6 +601,7 @@ Makefile: ../APVQuiz/APVQuiz.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.
 ../APVQuiz/resource.qrc:
 ../../../Qt/5.8/gcc_64/lib/libQt5Widgets.prl:
 ../../../Qt/5.8/gcc_64/lib/libQt5Gui.prl:
+../../../Qt/5.8/gcc_64/lib/libQt5Network.prl:
 ../../../Qt/5.8/gcc_64/lib/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../APVQuiz/APVQuiz.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
@@ -774,7 +776,7 @@ moc_firstwindow.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		../APVQuiz/firstwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
-	/home/vaibhav/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vaibhav/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/vaibhav/Projects/apvquiz-client/APVQuiz -I/home/vaibhav/Qt/5.8/gcc_64/include -I/home/vaibhav/Qt/5.8/gcc_64/include/QtWidgets -I/home/vaibhav/Qt/5.8/gcc_64/include/QtGui -I/home/vaibhav/Qt/5.8/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../APVQuiz/firstwindow.h -o moc_firstwindow.cpp
+	/home/vaibhav/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vaibhav/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/vaibhav/Projects/apvquiz-client/APVQuiz -I/home/vaibhav/Qt/5.8/gcc_64/include -I/home/vaibhav/Qt/5.8/gcc_64/include/QtWidgets -I/home/vaibhav/Qt/5.8/gcc_64/include/QtGui -I/home/vaibhav/Qt/5.8/gcc_64/include/QtNetwork -I/home/vaibhav/Qt/5.8/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../APVQuiz/firstwindow.h -o moc_firstwindow.cpp
 
 moc_signupdialog.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
@@ -882,7 +884,7 @@ moc_signupdialog.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QDialog \
 		../APVQuiz/signupdialog.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
-	/home/vaibhav/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vaibhav/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/vaibhav/Projects/apvquiz-client/APVQuiz -I/home/vaibhav/Qt/5.8/gcc_64/include -I/home/vaibhav/Qt/5.8/gcc_64/include/QtWidgets -I/home/vaibhav/Qt/5.8/gcc_64/include/QtGui -I/home/vaibhav/Qt/5.8/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../APVQuiz/signupdialog.h -o moc_signupdialog.cpp
+	/home/vaibhav/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vaibhav/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/vaibhav/Projects/apvquiz-client/APVQuiz -I/home/vaibhav/Qt/5.8/gcc_64/include -I/home/vaibhav/Qt/5.8/gcc_64/include/QtWidgets -I/home/vaibhav/Qt/5.8/gcc_64/include/QtGui -I/home/vaibhav/Qt/5.8/gcc_64/include/QtNetwork -I/home/vaibhav/Qt/5.8/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../APVQuiz/signupdialog.h -o moc_signupdialog.cpp
 
 moc_mainwindow.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
@@ -989,7 +991,7 @@ moc_mainwindow.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QDialog \
 		../APVQuiz/mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
-	/home/vaibhav/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vaibhav/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/vaibhav/Projects/apvquiz-client/APVQuiz -I/home/vaibhav/Qt/5.8/gcc_64/include -I/home/vaibhav/Qt/5.8/gcc_64/include/QtWidgets -I/home/vaibhav/Qt/5.8/gcc_64/include/QtGui -I/home/vaibhav/Qt/5.8/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../APVQuiz/mainwindow.h -o moc_mainwindow.cpp
+	/home/vaibhav/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vaibhav/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/vaibhav/Projects/apvquiz-client/APVQuiz -I/home/vaibhav/Qt/5.8/gcc_64/include -I/home/vaibhav/Qt/5.8/gcc_64/include/QtWidgets -I/home/vaibhav/Qt/5.8/gcc_64/include/QtGui -I/home/vaibhav/Qt/5.8/gcc_64/include/QtNetwork -I/home/vaibhav/Qt/5.8/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../APVQuiz/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1304,7 +1306,170 @@ firstwindow.o: ../APVQuiz/firstwindow.cpp ../APVQuiz/firstwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QWidget \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QMessageBox \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/qmessagebox.h
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDebug \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkAccessManager \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkaccessmanager.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QObject \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QSslConfiguration \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslconfiguration.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qabstractsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslerror.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslcertificate.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcryptographichash.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qssl.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QFlags \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QString \
+		../../../Qt/5.8/gcc_64/include/QtCore/QSharedDataPointer \
+		../../../Qt/5.8/gcc_64/include/QtCore/QMetaType \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QtNetwork \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QtNetworkDepends \
+		../../../Qt/5.8/gcc_64/include/QtCore/QtCore \
+		../../../Qt/5.8/gcc_64/include/QtCore/QtCoreDepends \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractanimation.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractproxymodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractstate.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstracttransition.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qanimationgroup.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qarraydataops.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbitarray.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbuffer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbytearraymatcher.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcache.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcollator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcommandlineoption.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcommandlineparser.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qelapsedtimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdir.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfileinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdiriterator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qeasingcurve.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qendian.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qeventtransition.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qexception.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfactoryinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfileselector.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QStringList \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfinalstate.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfuture.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfutureinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qrunnable.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qresultstore.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfuturewatcher.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qhistorystate.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qidentityproxymodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qjsonarray.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qjsonvalue.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qjsondocument.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qjsonobject.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlibrary.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlibraryinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qversionnumber.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlinkedlist.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlockfile.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qloggingcategory.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmath.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmetaobject.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmimedata.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmimedatabase.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmimetype.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpauseanimation.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qplugin.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpointer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpluginloader.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qprocess.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpropertyanimation.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qvariantanimation.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qqueue.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qreadwritelock.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qresource.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsavefile.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsemaphore.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsettings.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsharedmemory.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsignalmapper.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsignaltransition.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsocketnotifier.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstack.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstandardpaths.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstate.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstatemachine.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstorageinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstringlistmodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsystemsemaphore.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtemporarydir.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QScopedPointer \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtemporaryfile.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtextcodec.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qthread.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qthreadpool.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qthreadstorage.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtimeline.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtimezone.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtranslator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/quuid.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qwaitcondition.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qwineventnotifier.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qxmlstream.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtcoreversion.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qabstractnetworkcache.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QUrl \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qauthenticator.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qdnslookup.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qhostinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qhttpmultipart.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QByteArray \
+		../../../Qt/5.8/gcc_64/include/QtCore/QIODevice \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkRequest \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qlocalserver.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qlocalsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfigmanager.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkcookie.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QList \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkcookiejar.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkdatagram.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkdiskcache.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkproxy.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkreply.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworksession.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsctpserver.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpserver.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsctpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslcertificateextension.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslcipher.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qssldiffiehellmanparameters.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslellipticcurve.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QHash \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslkey.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qudpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetworkversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o firstwindow.o ../APVQuiz/firstwindow.cpp
 
 signupdialog.o: ../APVQuiz/signupdialog.cpp ../APVQuiz/signupdialog.h \

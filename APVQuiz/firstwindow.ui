@@ -66,6 +66,20 @@
       </layout>
      </item>
      <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="ipLabel">
+         <property name="text">
+          <string>       Ip        </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="iplineEdit"/>
+       </item>
+      </layout>
+     </item>
+     <item>
       <widget class="QPushButton" name="loginPushButton">
        <property name="text">
         <string>Login</string>

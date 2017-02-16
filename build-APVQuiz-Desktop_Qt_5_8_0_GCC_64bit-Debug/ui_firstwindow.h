@@ -40,6 +40,9 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *passwordLabel;
     QLineEdit *passwordLineEdit;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *ipLabel;
+    QLineEdit *iplineEdit;
     QPushButton *loginPushButton;
     QPushButton *signUpPushButton;
     QMenuBar *menuBar;
@@ -93,6 +96,22 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        ipLabel = new QLabel(groupBox);
+        ipLabel->setObjectName(QStringLiteral("ipLabel"));
+
+        horizontalLayout_3->addWidget(ipLabel);
+
+        iplineEdit = new QLineEdit(groupBox);
+        iplineEdit->setObjectName(QStringLiteral("iplineEdit"));
+
+        horizontalLayout_3->addWidget(iplineEdit);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
         loginPushButton = new QPushButton(groupBox);
         loginPushButton->setObjectName(QStringLiteral("loginPushButton"));
 
@@ -132,6 +151,7 @@ public:
         groupBox->setTitle(QString());
         usernameLabel->setText(QApplication::translate("FirstWindow", "Username", Q_NULLPTR));
         passwordLabel->setText(QApplication::translate("FirstWindow", "Password", Q_NULLPTR));
+        ipLabel->setText(QApplication::translate("FirstWindow", "       Ip        ", Q_NULLPTR));
         loginPushButton->setText(QApplication::translate("FirstWindow", "Login", Q_NULLPTR));
         signUpPushButton->setText(QApplication::translate("FirstWindow", "Sign Up", Q_NULLPTR));
     } // retranslateUi
