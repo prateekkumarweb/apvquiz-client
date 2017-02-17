@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QDialog>
+#include "Player.h"
 
 namespace Ui {
 class Mainwindow;
@@ -12,7 +13,7 @@ class Mainwindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit Mainwindow(QWidget *parent = 0);
+    explicit Mainwindow(Player usr, QWidget *parent = 0);
     ~Mainwindow();
 
 private slots:
@@ -22,12 +23,18 @@ private slots:
 
     void on_bollywoodPushButton_clicked();
 
-    void on_pushButton_3_clicked();
-
     void on_hollywodPushButton_clicked();
 
 private:
+    void updateBoard();
+
+    void hideWidgets();
+
+    void setPics();
+
+private:
     Ui::Mainwindow *ui;
+    Player plr;
 };
 
 #endif // MAINWINDOW_H

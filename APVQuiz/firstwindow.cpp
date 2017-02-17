@@ -5,10 +5,11 @@
 #include <QDebug>
 #include <QNetworkAccessManager>
 #include <QtNetwork>
-FirstWindow::FirstWindow(QWidget *parent) :
+FirstWindow::FirstWindow( QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::FirstWindow)
 {
+   // playerName = name;
     ui->setupUi(this);
 }
 
@@ -39,8 +40,7 @@ void FirstWindow::on_loginPushButton_clicked()
 
         QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
 
-        while(!reply->isFinished())
-        {
+        while(!reply->isFinished()){
         qApp->processEvents();
         }
 
@@ -50,8 +50,11 @@ void FirstWindow::on_loginPushButton_clicked()
         QJsonObject replyObject = jsonReply.object();
         QJsonValue value = replyObject["Auth"];
         if( value.toBool() ){
+            //qDebug() << "The players name is " << playerName << endl;
+            //playerName = username;
+            Player p(username,password);// = new Player(username,password);
             hide();
-            mw = new Mainwindow();
+            mw = new Mainwindow(p);
             mw->exec();
         } else{
             QMessageBox::warning(this,"Login Problem","Please check your username and password");
@@ -66,7 +69,7 @@ void FirstWindow::on_signUpPushButton_clicked()
    // if( Internet Connection Aavaliable){
         //Connect to server
         //Some stuff ...
-        hide();
+        //hide();
         sd = new SignUpDialog();
         sd->exec();
     //} else{

@@ -27,15 +27,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         firstwindow.cpp \
     signupdialog.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    Player.cpp \
+    dialog.cpp
 
 HEADERS  += firstwindow.h \
     signupdialog.h \
-    mainwindow.h
+    mainwindow.h \
+    Player.h \
+    dialog.h
 
 FORMS    += firstwindow.ui \
     signupdialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    dialog.ui
 
 RESOURCES += \
     resource.qrc

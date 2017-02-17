@@ -19,10 +19,10 @@
      <x>10</x>
      <y>10</y>
      <width>211</width>
-     <height>531</height>
+     <height>261</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="boardVerticalLayout">
     <item>
      <widget class="QLabel" name="welocomeLabel">
       <property name="text">
@@ -62,7 +62,7 @@
      <height>701</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
+   <layout class="QGridLayout" name="gamesGridLayout">
     <item row="1" column="0">
      <layout class="QVBoxLayout" name="hollywoodVerticalLayout">
       <item>

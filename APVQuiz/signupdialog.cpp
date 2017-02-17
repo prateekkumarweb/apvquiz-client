@@ -4,11 +4,12 @@
 #include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QtNetwork>
-SignUpDialog::SignUpDialog(QWidget *parent) :
+SignUpDialog::SignUpDialog( QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SignUpDialog)
 {
     ui->setupUi(this);
+    qDebug() << "Printed";
 }
 
 SignUpDialog::~SignUpDialog()
@@ -53,9 +54,11 @@ void SignUpDialog::on_continuePushButton_clicked()
                 QJsonValue message = replyObject["Message"];
 
                 if(statusValue.toBool()){
+                    //playerName = username;
+                    /*Player *p = new Player(username,password);
                     hide();
-                    mw = new Mainwindow();
-                    mw->exec();
+                    mw = new Mainwindow(p);
+                    mw->exec();*/
                 } else {
                     QMessageBox::warning(this,"Sign Up Error",message.toString());
                 }

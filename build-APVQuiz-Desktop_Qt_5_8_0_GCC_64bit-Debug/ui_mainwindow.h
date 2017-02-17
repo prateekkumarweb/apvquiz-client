@@ -29,13 +29,13 @@ class Ui_Mainwindow
 {
 public:
     QWidget *verticalLayoutWidget;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *boardVerticalLayout;
     QLabel *welocomeLabel;
     QLabel *gamesLabel;
     QLabel *pointsLabel;
     QLabel *contriLabel;
     QWidget *gridLayoutWidget;
-    QGridLayout *gridLayout;
+    QGridLayout *gamesGridLayout;
     QVBoxLayout *hollywoodVerticalLayout;
     QHBoxLayout *horizontalLayout_4;
     QLabel *hollywoodPicLabel;
@@ -104,36 +104,36 @@ public:
         Mainwindow->resize(954, 716);
         verticalLayoutWidget = new QWidget(Mainwindow);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 211, 531));
-        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        verticalLayoutWidget->setGeometry(QRect(10, 10, 211, 261));
+        boardVerticalLayout = new QVBoxLayout(verticalLayoutWidget);
+        boardVerticalLayout->setObjectName(QStringLiteral("boardVerticalLayout"));
+        boardVerticalLayout->setContentsMargins(0, 0, 0, 0);
         welocomeLabel = new QLabel(verticalLayoutWidget);
         welocomeLabel->setObjectName(QStringLiteral("welocomeLabel"));
 
-        verticalLayout->addWidget(welocomeLabel);
+        boardVerticalLayout->addWidget(welocomeLabel);
 
         gamesLabel = new QLabel(verticalLayoutWidget);
         gamesLabel->setObjectName(QStringLiteral("gamesLabel"));
 
-        verticalLayout->addWidget(gamesLabel);
+        boardVerticalLayout->addWidget(gamesLabel);
 
         pointsLabel = new QLabel(verticalLayoutWidget);
         pointsLabel->setObjectName(QStringLiteral("pointsLabel"));
 
-        verticalLayout->addWidget(pointsLabel);
+        boardVerticalLayout->addWidget(pointsLabel);
 
         contriLabel = new QLabel(verticalLayoutWidget);
         contriLabel->setObjectName(QStringLiteral("contriLabel"));
 
-        verticalLayout->addWidget(contriLabel);
+        boardVerticalLayout->addWidget(contriLabel);
 
         gridLayoutWidget = new QWidget(Mainwindow);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
         gridLayoutWidget->setGeometry(QRect(229, 9, 721, 701));
-        gridLayout = new QGridLayout(gridLayoutWidget);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
+        gamesGridLayout = new QGridLayout(gridLayoutWidget);
+        gamesGridLayout->setObjectName(QStringLiteral("gamesGridLayout"));
+        gamesGridLayout->setContentsMargins(0, 0, 0, 0);
         hollywoodVerticalLayout = new QVBoxLayout();
         hollywoodVerticalLayout->setObjectName(QStringLiteral("hollywoodVerticalLayout"));
         horizontalLayout_4 = new QHBoxLayout();
@@ -163,7 +163,7 @@ public:
         hollywoodVerticalLayout->addWidget(hollywodPushButton);
 
 
-        gridLayout->addLayout(hollywoodVerticalLayout, 1, 0, 1, 1);
+        gamesGridLayout->addLayout(hollywoodVerticalLayout, 1, 0, 1, 1);
 
         bollywoodVerticalLayout = new QVBoxLayout();
         bollywoodVerticalLayout->setObjectName(QStringLiteral("bollywoodVerticalLayout"));
@@ -194,7 +194,7 @@ public:
         bollywoodVerticalLayout->addWidget(bollywoodPushButton);
 
 
-        gridLayout->addLayout(bollywoodVerticalLayout, 0, 2, 1, 1);
+        gamesGridLayout->addLayout(bollywoodVerticalLayout, 0, 2, 1, 1);
 
         harryPotterVerticalLayout = new QVBoxLayout();
         harryPotterVerticalLayout->setObjectName(QStringLiteral("harryPotterVerticalLayout"));
@@ -225,7 +225,7 @@ public:
         harryPotterVerticalLayout->addWidget(harryPotterPushButton);
 
 
-        gridLayout->addLayout(harryPotterVerticalLayout, 0, 0, 1, 1);
+        gamesGridLayout->addLayout(harryPotterVerticalLayout, 0, 0, 1, 1);
 
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
@@ -256,7 +256,7 @@ public:
         verticalLayout_6->addWidget(pushButton_5);
 
 
-        gridLayout->addLayout(verticalLayout_6, 2, 0, 1, 1);
+        gamesGridLayout->addLayout(verticalLayout_6, 2, 0, 1, 1);
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
@@ -287,7 +287,7 @@ public:
         verticalLayout_3->addWidget(gkPushButton);
 
 
-        gridLayout->addLayout(verticalLayout_3, 0, 1, 1, 1);
+        gamesGridLayout->addLayout(verticalLayout_3, 0, 1, 1, 1);
 
         verticalLayout_7 = new QVBoxLayout();
         verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
@@ -297,7 +297,7 @@ public:
         verticalLayout_7->addLayout(horizontalLayout_10);
 
 
-        gridLayout->addLayout(verticalLayout_7, 3, 0, 1, 1);
+        gamesGridLayout->addLayout(verticalLayout_7, 3, 0, 1, 1);
 
         verticalLayout_8 = new QVBoxLayout();
         verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
@@ -328,7 +328,7 @@ public:
         verticalLayout_8->addWidget(pushButton_2);
 
 
-        gridLayout->addLayout(verticalLayout_8, 1, 1, 1, 1);
+        gamesGridLayout->addLayout(verticalLayout_8, 1, 1, 1, 1);
 
         verticalLayout_9 = new QVBoxLayout();
         verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
@@ -359,7 +359,7 @@ public:
         verticalLayout_9->addWidget(pushButton_6);
 
 
-        gridLayout->addLayout(verticalLayout_9, 2, 1, 1, 1);
+        gamesGridLayout->addLayout(verticalLayout_9, 2, 1, 1, 1);
 
         verticalLayout_10 = new QVBoxLayout();
         verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
@@ -390,7 +390,7 @@ public:
         verticalLayout_10->addWidget(pushButton_4);
 
 
-        gridLayout->addLayout(verticalLayout_10, 1, 2, 1, 1);
+        gamesGridLayout->addLayout(verticalLayout_10, 1, 2, 1, 1);
 
         verticalLayout_11 = new QVBoxLayout();
         verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
@@ -400,7 +400,7 @@ public:
         verticalLayout_11->addLayout(horizontalLayout_11);
 
 
-        gridLayout->addLayout(verticalLayout_11, 3, 1, 1, 1);
+        gamesGridLayout->addLayout(verticalLayout_11, 3, 1, 1, 1);
 
         verticalLayout_12 = new QVBoxLayout();
         verticalLayout_12->setObjectName(QStringLiteral("verticalLayout_12"));
@@ -431,7 +431,7 @@ public:
         verticalLayout_12->addWidget(pushButton_7);
 
 
-        gridLayout->addLayout(verticalLayout_12, 2, 2, 1, 1);
+        gamesGridLayout->addLayout(verticalLayout_12, 2, 2, 1, 1);
 
         verticalLayout_13 = new QVBoxLayout();
         verticalLayout_13->setObjectName(QStringLiteral("verticalLayout_13"));
@@ -441,7 +441,7 @@ public:
         verticalLayout_13->addLayout(horizontalLayout_12);
 
 
-        gridLayout->addLayout(verticalLayout_13, 3, 2, 1, 1);
+        gamesGridLayout->addLayout(verticalLayout_13, 3, 2, 1, 1);
 
 
         retranslateUi(Mainwindow);
