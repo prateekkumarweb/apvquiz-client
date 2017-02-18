@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "Player.h"
+#include "gamewindow.h"
 
 namespace Ui {
 class Mainwindow;
@@ -25,12 +26,22 @@ private slots:
 
     void on_hollywodPushButton_clicked();
 
+    void on_windowLoaded();
+
 private:
     void updateBoard();
 
     void hideWidgets();
 
     void setPics();
+
+    void startGame(QString subject);
+
+protected:
+      void showEvent(QShowEvent *ev);
+
+signals:
+      void window_loaded();
 
 private:
     Ui::Mainwindow *ui;

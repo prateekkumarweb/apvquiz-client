@@ -6,6 +6,7 @@ GameWindow::GameWindow(Player usr, QString sub, QWidget *parent) :
     ui(new Ui::GameWindow)
 {
     //ui->utilityLabel->setText("Looking for opponents."+sub);
+    setWindowTitle("Game");
     plr = usr;
     ui->setupUi(this);
 }

@@ -10,22 +10,12 @@ Mainwindow::Mainwindow(Player usr, QWidget *parent) :
     ui(new Ui::Mainwindow)
 {
     ui->setupUi(this);
-    setWindowTitle("Main Window");
+    setWindowTitle("APV Quiz");
     Qt::WindowFlags flags = windowFlags();
     setWindowFlags(flags | Qt::Window);
     plr = usr;
 
-    setPics();
-
-    //updateboard();
-    ui->welocomeLabel->setText(ui->welocomeLabel->text() + plr.getPlayerName());
-    int games = 12;
-    ui->gamesLabel->setText(ui->gamesLabel->text() + QString::number(games));
-    int pts = 12;
-    ui->pointsLabel->setText(ui->pointsLabel->text() + QString::number(pts));
-    int contri = 12;
-    ui->contriLabel->setText(ui->contriLabel->text() + QString::number(contri));
-
+    connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
 }
 
 Mainwindow::~Mainwindow()
@@ -35,21 +25,35 @@ Mainwindow::~Mainwindow()
 
 void Mainwindow::on_harryPotterPushButton_clicked()
 {
-
+    startGame("harryPotter");
 }
 
 void Mainwindow::on_gkPushButton_clicked()
 {
-
+    startGame("gk");
 }
 
 void Mainwindow::on_bollywoodPushButton_clicked()
 {
-
+    startGame("bollywood");
 }
 
 void Mainwindow::on_hollywodPushButton_clicked()
 {
+    startGame("hollywood");
+}
+
+void Mainwindow::on_windowLoaded()
+{
+    setPics();
+    //updateboard();
+    ui->welocomeLabel->setText(ui->welocomeLabel->text() + plr.getPlayerName());
+    int games = 12;
+    ui->gamesLabel->setText(ui->gamesLabel->text() + QString::number(games));
+    int pts = 12;
+    ui->pointsLabel->setText(ui->pointsLabel->text() + QString::number(pts));
+    int contri = 12;
+    ui->contriLabel->setText(ui->contriLabel->text() + QString::number(contri));
 
 }
 
@@ -104,4 +108,14 @@ void Mainwindow::setPics()
     ui->hollywoodPicLabel->setPixmap(hollywoodPic.scaled(64,64,Qt::KeepAspectRatio));
 }
 
+void Mainwindow::startGame(QString subject)
+{
+    mw = new Mainwindow(plr,subject);
+    mw->exec();
+}
 
+void Mainwindow::showEvent(QShowEvent *ev)
+{
+    QDialog::showEvent(ev);
+    emit window_loaded();
+}

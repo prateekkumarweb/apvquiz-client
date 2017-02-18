@@ -29,18 +29,18 @@ SOURCES += main.cpp\
     signupdialog.cpp \
     mainwindow.cpp \
     Player.cpp \
-    dialog.cpp
+    gamewindow.cpp
 
 HEADERS  += firstwindow.h \
     signupdialog.h \
     mainwindow.h \
     Player.h \
-    dialog.h
+    gamewindow.h
 
 FORMS    += firstwindow.ui \
     signupdialog.ui \
     mainwindow.ui \
-    dialog.ui
+    gamewindow.ui
 
 RESOURCES += \
     resource.qrc
