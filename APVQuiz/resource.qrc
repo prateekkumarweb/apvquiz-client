@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/images">
-        <file>images/Harry-Potter-Hat.ico</file>
-        <file>images/gk.png</file>
-    </qresource>
-</RCC>
