@@ -69,10 +69,12 @@ void FirstWindow::on_signUpPushButton_clicked()
    // if( Internet Connection Aavaliable){
         //Connect to server
         //Some stuff ...
-        //hide();
+        hide();
         sd = new SignUpDialog();
         sd->exec();
     //} else{
         //QMessageBox::warning(this, "Internet Connectivity","Could not connect to network. Please check internet connectivity.");
     //}
 }
+//abc 1
+//user pass

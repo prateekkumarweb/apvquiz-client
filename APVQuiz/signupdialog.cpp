@@ -37,7 +37,7 @@ void SignUpDialog::on_continuePushButton_clicked()
                 QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
                 QNetworkRequest req;
-                req.setUrl(QUrl("http://localhost:8000/login"));
+                req.setUrl(QUrl("http://localhost:8000/signup"));
                 req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
 
                 QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
@@ -53,12 +53,14 @@ void SignUpDialog::on_continuePushButton_clicked()
                 QJsonValue statusValue = replyObject["Status"];
                 QJsonValue message = replyObject["Message"];
 
+                qDebug() << jsonReply;
+
                 if(statusValue.toBool()){
                     //playerName = username;
-                    /*Player *p = new Player(username,password);
+                    Player p(username,password);
                     hide();
                     mw = new Mainwindow(p);
-                    mw->exec();*/
+                    mw->exec();
                 } else {
                     QMessageBox::warning(this,"Sign Up Error",message.toString());
                 }

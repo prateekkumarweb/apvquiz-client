@@ -2,7 +2,5 @@
     <qresource prefix="/images">
         <file>images/Harry-Potter-Hat.ico</file>
         <file>images/gk.png</file>
-        <file>images/hollywood.jpg</file>
-        <file>images/bollywood.png</file>
     </qresource>
 </RCC>
