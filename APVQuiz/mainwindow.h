@@ -46,6 +46,7 @@ signals:
 private:
     Ui::Mainwindow *ui;
     Player plr;
+    GameWindow *gw;
 };
 
 #endif // MAINWINDOW_H

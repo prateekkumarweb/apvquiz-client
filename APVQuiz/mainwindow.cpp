@@ -110,8 +110,8 @@ void Mainwindow::setPics()
 
 void Mainwindow::startGame(QString subject)
 {
-    mw = new Mainwindow(plr,subject);
-    mw->exec();
+    gw = new GameWindow(plr,subject);//Gamewindow(plr,subject);
+    gw->exec();
 }
 
 void Mainwindow::showEvent(QShowEvent *ev)

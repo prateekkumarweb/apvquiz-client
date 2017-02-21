@@ -37,7 +37,7 @@
    </property>
    <layout class="QFormLayout" name="opponentFormLayout">
     <item row="1" column="0">
-     <widget class="QLabel" name="opponenet1NameLabel">
+     <widget class="QLabel" name="opponent1NameLabel">
       <property name="minimumSize">
        <size>
         <width>150</width>
@@ -229,7 +229,7 @@ font: 44pt &quot;Ubuntu&quot;;
 color: rgb(239, 41, 41);</string>
    </property>
    <property name="text">
-    <string>df</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="questionLabel">
@@ -245,7 +245,7 @@ color: rgb(239, 41, 41);</string>
     <string/>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>730</x>
