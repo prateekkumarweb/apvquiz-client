@@ -5,6 +5,7 @@
 #include <QtNetwork>
 #include <QDateTime>
 #include <QTcpSocket>
+#include <QtWebSockets/QtWebSockets>
 GameWindow::GameWindow(Player usr, QString sub, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GameWindow)
@@ -16,18 +17,23 @@ GameWindow::GameWindow(Player usr, QString sub, QWidget *parent) :
 
     plr = usr;
     subject = sub;
+    currentRequesCondition = 0;
     ui->setupUi(this);
     timer = new QTimer(this);
     currentQuestionNumber = 1;
 
-    socket = new QTcpSocket(this);
+    //socket = new QTcpSocket(this);
+    //webSocket = new QWebSocket()
 
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
-    connect(socket,SIGNAL(connected()),this,SLOT(socketConnected()));
-    connect(socket,SIGNAL(disconnected()),this,SLOT(socketDisconnected()));
-    connect(socket,SIGNAL(readyRead()),this,SLOT(socketRead()));
-    connect(socket,SIGNAL(bytesWritten(qint64)),this,SLOT(socketWrote()));
-    connect(socket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(getError(QAbstractSocket::SocketError)));
+    connect(&webSocket,SIGNAL(&QWebSocket::connected), this, SLOT(webSocketConnected()));
+    connect(&webSocket,SIGNAL(&QWebSocket::disconnected), this, SLOT(webSocketDisonnected()));
+    connect(&webSocket, SIGNAL(&QWebSocket::textMessageReceived), this, SLOT(onWebSocketRead()));
+    //connect(socket,SIGNAL(connected()),this,SLOT(socketConnected()));
+    //connect(socket,SIGNAL(disconnected()),this,SLOT(socketDisconnected()));
+    //connect(socket,SIGNAL(readyRead()),this,SLOT(socketRead()));
+    //connect(socket,SIGNAL(bytesWritten(qint64)),this,SLOT(socketWrote()));
+    //connect(socket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(getError(QAbstractSocket::SocketError)));
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTimer()));
 }
 
@@ -42,7 +48,8 @@ void GameWindow::on_windowLoaded()
     ui->utilityLabel->setText("Looking for opponents ... ");
     qDebug() << "Enter window";
 
-    socket->connectToHost("localhost", 6000);
+    //socket->connectToHost("localhost", 6000);
+    webSocket.open(QUrl("http://localhost:8000"));
     qDebug() << "Here";
 
     //QJsonObject reply = getQuestion(currentQuestionNumber);
@@ -278,49 +285,34 @@ void GameWindow::on_option1PushButton_clicked()
     checkAnswer(1,timeOfAnswer.toInt());*/
 }
 
-void GameWindow::socketConnected()
+void GameWindow::webSocketConnected()
 {
     qDebug() << "Conn";
     QString playerData= plr.getPlayerName() + "\n" + plr.getPassword() + "\n";
     //Send subject;
-    socket->write(playerData.toLatin1().data());
+    //socket->write(playerData.toLatin1().data());
+    webSocket.sendTextMessage(playerData);
 }
 
-void GameWindow::socketDisconnected()
+void GameWindow::webSocketDisconnected()
 {
     qDebug() << "DConn";
 }
 
-QString GameWindow::socketRead()
+void GameWindow::onWebSocketRead(QString message)
 {
-    qDebug() << socket->readAll();
-    socket->close();
+    qDebug() << message;
+    /*if(currentRequesCondition == 0){
+        enableOptionButtons();
+    }*/
+    //socket->close();
+    //return "adsa";
     //timer->start();
 }
 
-void GameWindow::socketWrote()
+/*void GameWindow::socketWrote()
 {
     qDebug() << "Wrt";
 }
+*/
 
-void GameWindow::getError(QAbstractSocket::SocketError socketError)
-{
-    QString * errormsg = new QString;
-    switch (socketError){
-        case QAbstractSocket::RemoteHostClosedError:
-            errormsg->append("Remote host closed.");
-            break;
-        case QAbstractSocket::HostNotFoundError:
-            errormsg->append("Remote not found.");
-            break;
-        case QAbstractSocket::ConnectionRefusedError:
-            errormsg->append("Connection Refused.");
-            break;
-        default:
-            errormsg->append(QString("The following error ocurred: %1.").arg(socket->errorString()));
-    }
-    //emit sendConnectionError(*errormsg);
-    qDebug() << *errormsg;
-    delete errormsg;
-
-}

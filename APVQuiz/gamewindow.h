@@ -6,6 +6,7 @@
 #include <QtNetwork>
 #include <QTimer>
 #include <QTcpSocket>
+#include <QtWebSockets/QtWebSockets>
 #include "Player.h"
 namespace Ui {
 class GameWindow;
@@ -26,15 +27,15 @@ private slots:
 
     void on_option1PushButton_clicked();
 
-    void socketConnected();
+    void webSocketConnected();
 
-    void socketDisconnected();
+    void webSocketDisconnected();
 
-    QString socketRead();
+    void onWebSocketRead(QString message);
 
-    void socketWrote();
+    //void socketWrote();
 
-    void getError(QAbstractSocket::SocketError);
+    //void getError(QAbstractSocket::SocketError);
 
 private :
     void disableOptionButtons();
@@ -69,7 +70,9 @@ private:
     QTimer *timer;
     QTime *starttime;
     int currentQuestionNumber;
-    QTcpSocket *socket;
+    int currentRequesCondition;    //0 Question 1 Answer 2 Result
+    //QTcpSocket *socket;
+    QWebSocket webSocket;
 };
 
 #endif // GAMEWINDOW_H
