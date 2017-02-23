@@ -3,6 +3,8 @@
 
 #include <QNetworkAccessManager>
 #include <QtNetwork>
+#include <QDateTime>
+#include <QTcpSocket>
 GameWindow::GameWindow(Player usr, QString sub, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GameWindow)
@@ -18,8 +20,15 @@ GameWindow::GameWindow(Player usr, QString sub, QWidget *parent) :
     timer = new QTimer(this);
     currentQuestionNumber = 1;
 
+    socket = new QTcpSocket(this);
+
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
-    connect(this,SIGNAL(timeout()),this,SLOT(updateTimer()));
+    connect(socket,SIGNAL(connected()),this,SLOT(socketConnected()));
+    connect(socket,SIGNAL(disconnected()),this,SLOT(socketDisconnected()));
+    connect(socket,SIGNAL(readyRead()),this,SLOT(socketRead()));
+    connect(socket,SIGNAL(bytesWritten(qint64)),this,SLOT(socketWrote()));
+    connect(socket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(getError(QAbstractSocket::SocketError)));
+    connect(timer,SIGNAL(timeout()),this,SLOT(updateTimer()));
 }
 
 
@@ -31,28 +40,34 @@ GameWindow::~GameWindow()
 void GameWindow::on_windowLoaded()
 {
     ui->utilityLabel->setText("Looking for opponents ... ");
-    QJsonObject reply = getQuestion(currentQuestionNumber);
-    enableOptionButtons();
-    setupQuestionAnswer(reply);
-    starttime = new QTime(0,0,20);
-    updateOpponentsBoard(reply);
+    qDebug() << "Enter window";
+
+    socket->connectToHost("localhost", 6000);
+    qDebug() << "Here";
+
+    //QJsonObject reply = getQuestion(currentQuestionNumber);
+    //enableOptionButtons();
+    //setupQuestionAnswer(reply);
+    //starttime = new QTime(0,0,20);
+    //updateOpponentsBoard(reply);
+    //timer->start();
     //currentQuestionNumber++;
 }
 
 void GameWindow::updateTimer()
 {
-    starttime->setHMS(0,0,starttime->addSecs(-1).second());
+    /*starttime->setHMS(0,0,starttime->addSecs(-1).second());
     QString remainingTime = starttime->toString().right(2);
     ui->timerLabel->setText(remainingTime);
     if(remainingTime == "00"){
         timer->stop();
-        disableOptionButtons();
-        qDebug() << "Time up ..";
-        checkAnswer(0,0);
-    }
+        //disableOptionButtons();
+        //qDebug() << "Time up ..";
+        //checkAnswer(0,0);
+    }*/
 }
 
-void GameWindow::disableOptionButtons()
+/*void GameWindow::disableOptionButtons()
 {
     ui->option1PushButton->setEnabled(false);
     ui->option2PushButton->setEnabled(false);
@@ -66,6 +81,10 @@ void GameWindow::enableOptionButtons()
     ui->option2PushButton->setEnabled(true);
     ui->option3PushButton->setEnabled(true);
     ui->option4PushButton->setEnabled(true);
+    ui->option1PushButton->setStyleSheet("background-color: rgb(255,255,255);");
+    ui->option1PushButton->setStyleSheet("background-color: rgb(255,255,255);");
+    ui->option1PushButton->setStyleSheet("background-color: rgb(255,255,255);");
+    ui->option1PushButton->setStyleSheet("background-color: rgb(255,255,255);");
 }
 
 void GameWindow::updateOpponentsBoard(QJsonObject reply)
@@ -79,9 +98,38 @@ void GameWindow::updateOpponentsBoard(QJsonObject reply)
     ui->opponent2Scorelabel->setText(opponentScoreArray[1].toString());
     ui->opponent3NameLabel->setText(opponentNameArray[2].toString());
     ui->opponent3Scorelabel->setText(opponentScoreArray[2].toString());
-}
+}*/
 
-QJsonObject GameWindow::getQuestion(int q_number)
+/*void GameWindow::getTcp(int currentQuestionNumber)
+{
+    socket = new QTcpSocket(this);
+        socket->connectToHost("localhost", 6000);
+
+        if(socket->waitForConnected())
+        {
+            qDebug() << "Connected!";
+
+            // send
+            QString name = plr.getPlayerName()+"\n"+plr.getPassword()+"\n";
+            socket->write(name.toLatin1().data());
+            //socket->waitForBytesWritten(1000);
+            //socket->write("pass\n");
+            socket->waitForBytesWritten();
+            socket->waitForReadyRead(120000);
+            qDebug() << "Reading: " << socket->bytesAvailable();
+
+            qDebug() << socket->readAll();
+
+            //socket->close();
+        }
+        else
+        {
+            qDebug() << "Not connected!";
+        }
+
+}*/
+
+/*QJsonObject GameWindow::getQuestion(int q_number)
 {
     QUrlQuery postData;
     postData.addQueryItem("username", plr.getPlayerName());
@@ -181,12 +229,16 @@ void GameWindow::checkAnswer(int choice, int time)
     switch (choice){
         case 1:
             ui->option1PushButton->setStyleSheet("background-color: rgb(255,0,0);");
+            break;
         case 2:
             ui->option2PushButton->setStyleSheet("background-color: rgb(255,0,0);");
+            break;
         case 3:
             ui->option3PushButton->setStyleSheet("background-color: rgb(255,0,0);");
+            break;
         case 4:
             ui->option4PushButton->setStyleSheet("background-color: rgb(255,0,0);");
+            break;
         //case 1:
             //ui->option1PushButton->setStyleSheet("background-color: rgb(255,0,0);");
     }
@@ -195,19 +247,23 @@ void GameWindow::checkAnswer(int choice, int time)
     switch (correctOption.toInt()){
         case 1:
             ui->option1PushButton->setStyleSheet("background-color: rgb(0,255,0);");
+            break;
         case 2:
             ui->option2PushButton->setStyleSheet("background-color: rgb(0,255,0);");
+            break;
         case 3:
             ui->option3PushButton->setStyleSheet("background-color: rgb(0,255,0);");
+            break;
         case 4:
             ui->option4PushButton->setStyleSheet("background-color: rgb(0,255,0);");
+            break;
         //case 1:
             //ui->option1PushButton->setStyleSheet("background-color: rgb(255,0,0);");
     }
 
     proceedInGame();
 }
-
+*/
 void GameWindow::showEvent(QShowEvent *ev)
 {
     QDialog::showEvent(ev);
@@ -216,7 +272,55 @@ void GameWindow::showEvent(QShowEvent *ev)
 
 void GameWindow::on_option1PushButton_clicked()
 {
-    timer->stop();
+    /*timer->stop();
+    qDebug() << "Option 1 clicked";
     QString timeOfAnswer = ui->timerLabel->text();
-    checkAnswer(1,timeOfAnswer.toInt());
+    checkAnswer(1,timeOfAnswer.toInt());*/
+}
+
+void GameWindow::socketConnected()
+{
+    qDebug() << "Conn";
+    QString playerData= plr.getPlayerName() + "\n" + plr.getPassword() + "\n";
+    //Send subject;
+    socket->write(playerData.toLatin1().data());
+}
+
+void GameWindow::socketDisconnected()
+{
+    qDebug() << "DConn";
+}
+
+QString GameWindow::socketRead()
+{
+    qDebug() << socket->readAll();
+    socket->close();
+    //timer->start();
+}
+
+void GameWindow::socketWrote()
+{
+    qDebug() << "Wrt";
+}
+
+void GameWindow::getError(QAbstractSocket::SocketError socketError)
+{
+    QString * errormsg = new QString;
+    switch (socketError){
+        case QAbstractSocket::RemoteHostClosedError:
+            errormsg->append("Remote host closed.");
+            break;
+        case QAbstractSocket::HostNotFoundError:
+            errormsg->append("Remote not found.");
+            break;
+        case QAbstractSocket::ConnectionRefusedError:
+            errormsg->append("Connection Refused.");
+            break;
+        default:
+            errormsg->append(QString("The following error ocurred: %1.").arg(socket->errorString()));
+    }
+    //emit sendConnectionError(*errormsg);
+    qDebug() << *errormsg;
+    delete errormsg;
+
 }

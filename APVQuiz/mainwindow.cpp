@@ -110,6 +110,7 @@ void Mainwindow::setPics()
 
 void Mainwindow::startGame(QString subject)
 {
+    qDebug() << "MAin";
     gw = new GameWindow(plr,subject);//Gamewindow(plr,subject);
     gw->exec();
 }

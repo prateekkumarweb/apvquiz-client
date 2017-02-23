@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QNetworkAccessManager>
 #include <QtNetwork>
+#include <QTimer>
+#include <QTcpSocket>
 #include "Player.h"
 namespace Ui {
 class GameWindow;
@@ -24,6 +26,16 @@ private slots:
 
     void on_option1PushButton_clicked();
 
+    void socketConnected();
+
+    void socketDisconnected();
+
+    QString socketRead();
+
+    void socketWrote();
+
+    void getError(QAbstractSocket::SocketError);
+
 private :
     void disableOptionButtons();
 
@@ -41,8 +53,11 @@ private :
 
     void proceedInGame();
 
+    //void getTcp(int currentQuestionNumber);
+
 protected:
       void showEvent(QShowEvent *ev);
+
 
 signals:
       void window_loaded();
@@ -54,6 +69,7 @@ private:
     QTimer *timer;
     QTime *starttime;
     int currentQuestionNumber;
+    QTcpSocket *socket;
 };
 
 #endif // GAMEWINDOW_H
