@@ -17,26 +17,17 @@ GameWindow::GameWindow(Player usr, QString sub, QWidget *parent) :
 
     plr = usr;
     subject = sub;
-    currentRequesCondition = 0;
+    //currentRequestCondition = 0;
     ui->setupUi(this);
     timer = new QTimer(this);
-    currentQuestionNumber = 1;
-
-    //socket = new QTcpSocket(this);
-    //webSocket = new QWebSocket()
+    currentQuestionNumber = 0;
 
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
-    connect(&webSocket,SIGNAL(&QWebSocket::connected), this, SLOT(webSocketConnected()));
-    connect(&webSocket,SIGNAL(&QWebSocket::disconnected), this, SLOT(webSocketDisonnected()));
-    connect(&webSocket, SIGNAL(&QWebSocket::textMessageReceived), this, SLOT(onWebSocketRead()));
-    //connect(socket,SIGNAL(connected()),this,SLOT(socketConnected()));
-    //connect(socket,SIGNAL(disconnected()),this,SLOT(socketDisconnected()));
-    //connect(socket,SIGNAL(readyRead()),this,SLOT(socketRead()));
-    //connect(socket,SIGNAL(bytesWritten(qint64)),this,SLOT(socketWrote()));
-    //connect(socket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(getError(QAbstractSocket::SocketError)));
+    connect(&webSocket,&QWebSocket::connected, this, &GameWindow::webSocketConnected);
+    connect(&webSocket,&QWebSocket::disconnected, this, &GameWindow::webSocketDisconnected);
+    connect(&webSocket,&QWebSocket::textMessageReceived, this, &GameWindow::onWebSocketRead);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTimer()));
 }
-
 
 GameWindow::~GameWindow()
 {
@@ -46,35 +37,35 @@ GameWindow::~GameWindow()
 void GameWindow::on_windowLoaded()
 {
     ui->utilityLabel->setText("Looking for opponents ... ");
-    qDebug() << "Enter window";
+    //qDebug() << "Enter window";
 
     //socket->connectToHost("localhost", 6000);
-    webSocket.open(QUrl("http://localhost:8000"));
-    qDebug() << "Here";
+    webSocket.open(QUrl("ws://localhost:8000/play"));
+    //qDebug() << "Here";
 
-    //QJsonObject reply = getQuestion(currentQuestionNumber);
-    //enableOptionButtons();
-    //setupQuestionAnswer(reply);
-    //starttime = new QTime(0,0,20);
+
     //updateOpponentsBoard(reply);
     //timer->start();
-    //currentQuestionNumber++;
+    //
 }
 
 void GameWindow::updateTimer()
 {
-    /*starttime->setHMS(0,0,starttime->addSecs(-1).second());
+    //qDebug() << "Timeout" << starttime->toString();
+    starttime->setHMS(0,0,starttime->addSecs(-1).second());
     QString remainingTime = starttime->toString().right(2);
     ui->timerLabel->setText(remainingTime);
     if(remainingTime == "00"){
         timer->stop();
-        //disableOptionButtons();
+        disableOptionButtons();
+        sendChoiceToServer(0,"0");
+        checkSelectedChoice(0);
         //qDebug() << "Time up ..";
         //checkAnswer(0,0);
-    }*/
+    }
 }
 
-/*void GameWindow::disableOptionButtons()
+void GameWindow::disableOptionButtons()
 {
     ui->option1PushButton->setEnabled(false);
     ui->option2PushButton->setEnabled(false);
@@ -89,150 +80,41 @@ void GameWindow::enableOptionButtons()
     ui->option3PushButton->setEnabled(true);
     ui->option4PushButton->setEnabled(true);
     ui->option1PushButton->setStyleSheet("background-color: rgb(255,255,255);");
-    ui->option1PushButton->setStyleSheet("background-color: rgb(255,255,255);");
-    ui->option1PushButton->setStyleSheet("background-color: rgb(255,255,255);");
-    ui->option1PushButton->setStyleSheet("background-color: rgb(255,255,255);");
+    ui->option2PushButton->setStyleSheet("background-color: rgb(255,255,255);");
+    ui->option3PushButton->setStyleSheet("background-color: rgb(255,255,255);");
+    ui->option4PushButton->setStyleSheet("background-color: rgb(255,255,255);");
 }
 
-void GameWindow::updateOpponentsBoard(QJsonObject reply)
+void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,QString player2Name,QString player2Score)
 {
-    QJsonArray opponentNameArray = reply["Opponents"].toArray();
-    QJsonArray opponentScoreArray = reply["Scores"].toArray();
-
-    ui->opponent1NameLabel->setText(opponentNameArray[0].toString());
-    ui->opponent1Scorelabel->setText(opponentScoreArray[0].toString());
-    ui->opponent2NameLabel->setText(opponentNameArray[1].toString());
-    ui->opponent2Scorelabel->setText(opponentScoreArray[1].toString());
-    ui->opponent3NameLabel->setText(opponentNameArray[2].toString());
-    ui->opponent3Scorelabel->setText(opponentScoreArray[2].toString());
-}*/
-
-/*void GameWindow::getTcp(int currentQuestionNumber)
-{
-    socket = new QTcpSocket(this);
-        socket->connectToHost("localhost", 6000);
-
-        if(socket->waitForConnected())
-        {
-            qDebug() << "Connected!";
-
-            // send
-            QString name = plr.getPlayerName()+"\n"+plr.getPassword()+"\n";
-            socket->write(name.toLatin1().data());
-            //socket->waitForBytesWritten(1000);
-            //socket->write("pass\n");
-            socket->waitForBytesWritten();
-            socket->waitForReadyRead(120000);
-            qDebug() << "Reading: " << socket->bytesAvailable();
-
-            qDebug() << socket->readAll();
-
-            //socket->close();
-        }
-        else
-        {
-            qDebug() << "Not connected!";
-        }
-
-}*/
-
-/*QJsonObject GameWindow::getQuestion(int q_number)
-{
-    QUrlQuery postData;
-    postData.addQueryItem("username", plr.getPlayerName());
-    postData.addQueryItem("password", plr.getPassword());
-    postData.addQueryItem("subject",subject);
-
-    QString url = "";//"http://localhost:8000"+"/play/"+subject+"/q"+q_number;
-
-    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-
-    QNetworkRequest req;
-    req.setUrl(QUrl(url));
-    req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
-
-    QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
-
-    while(!reply->isFinished()){
-    qApp->processEvents();
-    }
-
-    QByteArray questionInfoByteArray = reply->readAll();
-    QJsonDocument questionInfo = QJsonDocument::fromJson(questionInfoByteArray);
-    QJsonObject question = questionInfo.object();
-
-    return question;
+    ui->opponent1NameLabel->setText(player1Name);
+    ui->opponent1Scorelabel->setText(player1Score);
+    ui->opponent2NameLabel->setText(player2Name);
+    ui->opponent2Scorelabel->setText(player2Score);
 }
 
-void GameWindow::setupQuestionAnswer(QJsonObject reply)
+void GameWindow::setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore)
 {
-    QJsonValue question = reply["Question"];
-    QJsonArray options = reply["Options"].toArray();
-    QJsonValue ownScore = reply["Ownscore"];
-
-    ui->questionLabel->setText(question.toString());
-    ui->option1PushButton->setText(options[0].toString());
-    ui->option2PushButton->setText(options[1].toString());
-    ui->option3PushButton->setText(options[2].toString());
-    ui->option4PushButton->setText(options[3].toString());
-    ui->scoreLabel->setText(ownScore.toString());
+    ui->questionLabel->setText(question);
+    ui->option1PushButton->setText(option1);
+    ui->option2PushButton->setText(option2);
+    ui->option3PushButton->setText(option3);
+    ui->option4PushButton->setText(option4);
+    ui->scoreLabel->setText(ownScore);
 
     ui->utilityLabel->setText("");
 
     //start Timer
 }
 
-QJsonObject GameWindow::getResult(int choice,int time)
+void GameWindow::sendChoiceToServer(int choice, QString timeOfAnswer)
 {
-    QUrlQuery postData;
-    postData.addQueryItem("username", plr.getPlayerName());
-    postData.addQueryItem("password", plr.getPassword());
-    postData.addQueryItem("subject",subject);
-    postData.addQueryItem("choice",QString::number(choice));
-    postData.addQueryItem("time",QString::number(time));
-
-    QString url = "";//"http://localhost:8000"+"/play/"+subject+"/a"+q_number;
-
-    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-
-    QNetworkRequest req;
-    req.setUrl(QUrl(url));
-    req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
-
-    QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
-
-    while(!reply->isFinished()){
-    qApp->processEvents();
-    }
-
-    QByteArray replyInfoByteArray = reply->readAll();
-    QJsonDocument replyInfo = QJsonDocument::fromJson(replyInfoByteArray);
-    QJsonObject replyobject = replyInfo.object();
-
-    return replyobject;
+    webSocket.sendTextMessage(QString::number(choice));
+    webSocket.sendTextMessage(timeOfAnswer);
 }
 
-void GameWindow::proceedInGame()
+void GameWindow::checkSelectedChoice(int choice)
 {
-    currentQuestionNumber++;
-    if(currentQuestionNumber<6){
-        QJsonObject reply = getQuestion(currentQuestionNumber);
-        enableOptionButtons();
-        setupQuestionAnswer(reply);
-        starttime = new QTime(0,0,20);
-        timer->start();
-        updateOpponentsBoard(reply);
-    }
-    else{
-        ui->utilityLabel->setText("Thanks for playing. Waiting for final scores");
-        //Call the function which gets the final result
-    }
-}
-
-void GameWindow::checkAnswer(int choice, int time)
-{
-    QJsonObject result = getResult(choice, time);
-
     switch (choice){
         case 1:
             ui->option1PushButton->setStyleSheet("background-color: rgb(255,0,0);");
@@ -246,12 +128,9 @@ void GameWindow::checkAnswer(int choice, int time)
         case 4:
             ui->option4PushButton->setStyleSheet("background-color: rgb(255,0,0);");
             break;
-        //case 1:
-            //ui->option1PushButton->setStyleSheet("background-color: rgb(255,0,0);");
     }
 
-    QJsonValue correctOption = result["correctOption"];
-    switch (correctOption.toInt()){
+    switch (correctAnswer){
         case 1:
             ui->option1PushButton->setStyleSheet("background-color: rgb(0,255,0);");
             break;
@@ -264,8 +143,19 @@ void GameWindow::checkAnswer(int choice, int time)
         case 4:
             ui->option4PushButton->setStyleSheet("background-color: rgb(0,255,0);");
             break;
-        //case 1:
-            //ui->option1PushButton->setStyleSheet("background-color: rgb(255,0,0);");
+    }
+}
+
+/*
+void GameWindow::checkAnswer(int choice, int time)
+{
+    QJsonObject result = getResult(choice, time);
+
+
+
+    QJsonValue correctOption = result["correctOption"];
+    switch (correctOption.toInt()){
+
     }
 
     proceedInGame();
@@ -277,21 +167,16 @@ void GameWindow::showEvent(QShowEvent *ev)
     emit window_loaded();
 }
 
-void GameWindow::on_option1PushButton_clicked()
-{
-    /*timer->stop();
-    qDebug() << "Option 1 clicked";
-    QString timeOfAnswer = ui->timerLabel->text();
-    checkAnswer(1,timeOfAnswer.toInt());*/
-}
-
 void GameWindow::webSocketConnected()
 {
     qDebug() << "Conn";
-    QString playerData= plr.getPlayerName() + "\n" + plr.getPassword() + "\n";
+    QString playerName= plr.getPlayerName();
+    QString playerPassword = plr.getPassword();
     //Send subject;
-    //socket->write(playerData.toLatin1().data());
-    webSocket.sendTextMessage(playerData);
+    webSocket.sendTextMessage(playerName);
+    webSocket.sendTextMessage(playerPassword);
+    webSocket.flush();
+    //webSocket.close();
 }
 
 void GameWindow::webSocketDisconnected()
@@ -301,18 +186,75 @@ void GameWindow::webSocketDisconnected()
 
 void GameWindow::onWebSocketRead(QString message)
 {
-    qDebug() << message;
-    /*if(currentRequesCondition == 0){
+    currentQuestionNumber++;
+    if(currentQuestionNumber < 6){
+        qDebug() << "message" << message;
+        QString question, option1, option2, option3, option4, correctOption, ownScore, player1Name, player1Score, player2Name, player2Score;
+        QRegExp rx ("(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)");
+        rx.indexIn(message);
+        question = rx.cap(1);
+        option1 = rx.cap(2);
+        option2 = rx.cap(3);
+        option3 = rx.cap(4);
+        option4 = rx.cap(5);
+        correctOption = rx.cap(6);
+        ownScore = rx.cap(7);
+        player1Name = rx.cap(8);
+        player1Score = rx.cap(9);
+        player2Name = rx.cap(10);
+        player2Score = rx.cap(11);
+        setupQuestionAnswer(question, option1, option2, option3, option4, ownScore);
+        starttime = new QTime(0,0,30);
+        timer->start(1000);
+        correctAnswer = correctOption.toInt();
         enableOptionButtons();
-    }*/
-    //socket->close();
-    //return "adsa";
-    //timer->start();
+        updateOpponentsBoard(player1Name, player1Score, player2Name, player2Score);
+    }
+    else {
+        //Show final results
+    }
 }
-
 /*void GameWindow::socketWrote()
 {
     qDebug() << "Wrt";
 }
 */
+void GameWindow::on_option1PushButton_clicked()
+{
+    timer->stop();
+    qDebug() << "Option 1 clicked";
+    disableOptionButtons();
+    QString timeOfAnswer = ui->timerLabel->text();
+    sendChoiceToServer(1, timeOfAnswer);
+    checkSelectedChoice(1);
+}
 
+void GameWindow::on_option2PushButton_clicked()
+{
+    timer->stop();
+    disableOptionButtons();
+    qDebug() << "Option 2 clicked";
+    QString timeOfAnswer = ui->timerLabel->text();
+    sendChoiceToServer(2, timeOfAnswer);
+    checkSelectedChoice(2);
+}
+
+void GameWindow::on_option3PushButton_clicked()
+{
+    timer->stop();
+    disableOptionButtons();
+    qDebug() << "Option 3 clicked";
+    QString timeOfAnswer = ui->timerLabel->text();
+    sendChoiceToServer(3, timeOfAnswer);
+    checkSelectedChoice(3);
+}
+
+void GameWindow::on_option4PushButton_clicked()
+{
+    timer->stop();
+    disableOptionButtons();
+    qDebug() << "Option 4 clicked";
+    QString timeOfAnswer = ui->timerLabel->text();
+    sendChoiceToServer(4, timeOfAnswer);
+    checkSelectedChoice(4);
+}

@@ -36,11 +36,50 @@
     </rect>
    </property>
    <layout class="QFormLayout" name="opponentFormLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="opponentLabel">
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Opponents</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="opponentScoreLabel">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Score</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0">
      <widget class="QLabel" name="opponent1NameLabel">
       <property name="minimumSize">
        <size>
         <width>150</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="opponent1Scorelabel">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
         <height>40</height>
        </size>
       </property>
@@ -62,58 +101,6 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="opponent3NameLabel">
-      <property name="minimumSize">
-       <size>
-        <width>150</width>
-        <height>40</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="opponentLabel">
-      <property name="minimumSize">
-       <size>
-        <width>150</width>
-        <height>40</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Opponents</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="opponent1Scorelabel">
-      <property name="minimumSize">
-       <size>
-        <width>50</width>
-        <height>40</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLabel" name="opponent3Scorelabel">
-      <property name="minimumSize">
-       <size>
-        <width>50</width>
-        <height>40</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="1">
      <widget class="QLabel" name="opponent2Scorelabel">
       <property name="minimumSize">
@@ -124,19 +111,6 @@
       </property>
       <property name="text">
        <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="opponentScoreLabel">
-      <property name="minimumSize">
-       <size>
-        <width>50</width>
-        <height>40</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Score</string>
       </property>
      </widget>
     </item>

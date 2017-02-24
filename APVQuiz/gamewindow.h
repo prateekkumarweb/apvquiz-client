@@ -35,30 +35,27 @@ private slots:
 
     //void socketWrote();
 
-    //void getError(QAbstractSocket::SocketError);
+    void on_option2PushButton_clicked();
+
+    void on_option3PushButton_clicked();
+
+    void on_option4PushButton_clicked();
 
 private :
     void disableOptionButtons();
 
     void enableOptionButtons();
 
-    void updateOpponentsBoard(QJsonObject reply);
+    void updateOpponentsBoard(QString player1Name,QString player1Score,QString player2Name,QString player2Score);
 
-    QJsonObject getQuestion(int q_number);
+    void setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore);
 
-    void setupQuestionAnswer(QJsonObject reply);
+    void sendChoiceToServer(int choice, QString timeOfAnswer);
 
-    QJsonObject getResult(int choice,int time);
-
-    void checkAnswer(int choice, int time);
-
-    void proceedInGame();
-
-    //void getTcp(int currentQuestionNumber);
-
+    void checkSelectedChoice(int choice);
 protected:
-      void showEvent(QShowEvent *ev);
 
+      void showEvent(QShowEvent *ev);
 
 signals:
       void window_loaded();
@@ -70,7 +67,8 @@ private:
     QTimer *timer;
     QTime *starttime;
     int currentQuestionNumber;
-    int currentRequesCondition;    //0 Question 1 Answer 2 Result
+    int correctAnswer;
+    //int currentRequestCondition;    //0 Question 1 Answer 2 Result
     //QTcpSocket *socket;
     QWebSocket webSocket;
 };
