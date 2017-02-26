@@ -17,7 +17,7 @@ class GameWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit GameWindow(Player usr, QString sub, QWidget *parent = 0);
+    explicit GameWindow(Player usr, QString sub, QString ip, QWidget *parent = 0);
     ~GameWindow();
 
 private slots:
@@ -53,6 +53,8 @@ private :
     void sendChoiceToServer(int choice, QString timeOfAnswer);
 
     void checkSelectedChoice(int choice);
+
+    void handleButtonClicked(int buttonNumber);
 protected:
 
       void showEvent(QShowEvent *ev);
@@ -68,6 +70,7 @@ private:
     QTime *starttime;
     int currentQuestionNumber;
     int correctAnswer;
+    QString ipServer;
     //int currentRequestCondition;    //0 Question 1 Answer 2 Result
     //QTcpSocket *socket;
     QWebSocket webSocket;

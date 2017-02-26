@@ -5,7 +5,9 @@
 #include <QPixmap>
 #include <QNetworkAccessManager>
 #include <QtNetwork>
-Mainwindow::Mainwindow(Player usr, QWidget *parent) :
+
+#include <thread>
+Mainwindow::Mainwindow(Player usr, QString ip, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Mainwindow)
 {
@@ -14,6 +16,7 @@ Mainwindow::Mainwindow(Player usr, QWidget *parent) :
     Qt::WindowFlags flags = windowFlags();
     setWindowFlags(flags | Qt::Window);
     plr = usr;
+    ipaddress = ip;
 
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
 }
@@ -45,7 +48,9 @@ void Mainwindow::on_hollywodPushButton_clicked()
 
 void Mainwindow::on_windowLoaded()
 {
-    setPics();
+    std::thread forPics(&Mainwindow::setPics,this);
+    //std::thread forBoardUpdation(updateboard);
+    //setPics();
     //updateboard();
     ui->welocomeLabel->setText(ui->welocomeLabel->text() + plr.getPlayerName());
     int games = 12;
@@ -54,6 +59,8 @@ void Mainwindow::on_windowLoaded()
     ui->pointsLabel->setText(ui->pointsLabel->text() + QString::number(pts));
     int contri = 12;
     ui->contriLabel->setText(ui->contriLabel->text() + QString::number(contri));
+    forPics.join();
+    //forBoardUpdation(updateBoard);
 
 }
 
@@ -65,8 +72,10 @@ void Mainwindow::updateBoard()
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
+    QString ipServer = "http://"+ipaddress+"/sth";
+
     QNetworkRequest req;
-    req.setUrl(QUrl("http://localhost:8000/sth"));
+    req.setUrl(QUrl(ipServer));
     req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
 
     QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
@@ -110,8 +119,9 @@ void Mainwindow::setPics()
 
 void Mainwindow::startGame(QString subject)
 {
-    qDebug() << "MAin";
-    gw = new GameWindow(plr,subject);//Gamewindow(plr,subject);
+    //qDebug() << "MAin";
+    qDebug() << ipaddress;
+    gw = new GameWindow(plr,subject, ipaddress);//Gamewindow(plr,subject);
     gw->exec();
 }
 

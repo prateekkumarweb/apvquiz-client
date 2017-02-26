@@ -528,6 +528,17 @@ font: 14pt &quot;Ubuntu&quot;;</string>
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>harryPotterPushButton</tabstop>
+  <tabstop>gkPushButton</tabstop>
+  <tabstop>bollywoodPushButton</tabstop>
+  <tabstop>hollywodPushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_7</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

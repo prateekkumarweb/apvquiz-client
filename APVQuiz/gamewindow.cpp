@@ -6,21 +6,24 @@
 #include <QDateTime>
 #include <QTcpSocket>
 #include <QtWebSockets/QtWebSockets>
-GameWindow::GameWindow(Player usr, QString sub, QWidget *parent) :
+
+#include <thread>
+GameWindow::GameWindow(Player usr, QString sub, QString ip, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GameWindow)
 {
-    //ui->utilityLabel->setText("Looking for opponents."+sub);
     setWindowTitle("Game");
     Qt::WindowFlags flags = windowFlags();
     setWindowFlags(flags | Qt::Window);
 
     plr = usr;
     subject = sub;
-    //currentRequestCondition = 0;
     ui->setupUi(this);
     timer = new QTimer(this);
     currentQuestionNumber = 0;
+    qDebug() << "ip is" << ip;
+    ipServer = "ws://"+ip+"/play";
+    qDebug() << "ipServer " << ipServer;
 
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
     connect(&webSocket,&QWebSocket::connected, this, &GameWindow::webSocketConnected);
@@ -31,27 +34,21 @@ GameWindow::GameWindow(Player usr, QString sub, QWidget *parent) :
 
 GameWindow::~GameWindow()
 {
+    //Send to server (Game left)
     delete ui;
 }
 
 void GameWindow::on_windowLoaded()
 {
     ui->utilityLabel->setText("Looking for opponents ... ");
-    //qDebug() << "Enter window";
+    disableOptionButtons();
 
-    //socket->connectToHost("localhost", 6000);
-    webSocket.open(QUrl("ws://localhost:8000/play"));
-    //qDebug() << "Here";
-
-
-    //updateOpponentsBoard(reply);
-    //timer->start();
-    //
+    qDebug() << "ip" << ipServer;
+    webSocket.open(QUrl(ipServer));
 }
 
 void GameWindow::updateTimer()
 {
-    //qDebug() << "Timeout" << starttime->toString();
     starttime->setHMS(0,0,starttime->addSecs(-1).second());
     QString remainingTime = starttime->toString().right(2);
     ui->timerLabel->setText(remainingTime);
@@ -60,12 +57,10 @@ void GameWindow::updateTimer()
         disableOptionButtons();
         sendChoiceToServer(0,"0");
         checkSelectedChoice(0);
-        //qDebug() << "Time up ..";
-        //checkAnswer(0,0);
     }
 }
 
-void GameWindow::disableOptionButtons()
+void GameWindow::disableOptionButtons()            //Part
 {
     ui->option1PushButton->setEnabled(false);
     ui->option2PushButton->setEnabled(false);
@@ -73,7 +68,7 @@ void GameWindow::disableOptionButtons()
     ui->option4PushButton->setEnabled(false);
 }
 
-void GameWindow::enableOptionButtons()
+void GameWindow::enableOptionButtons()          //Part                                                                                                          //Part
 {
     ui->option1PushButton->setEnabled(true);
     ui->option2PushButton->setEnabled(true);
@@ -85,7 +80,7 @@ void GameWindow::enableOptionButtons()
     ui->option4PushButton->setStyleSheet("background-color: rgb(255,255,255);");
 }
 
-void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,QString player2Name,QString player2Score)
+void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,QString player2Name,QString player2Score)                            //Part
 {
     ui->opponent1NameLabel->setText(player1Name);
     ui->opponent1Scorelabel->setText(player1Score);
@@ -93,7 +88,7 @@ void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,Q
     ui->opponent2Scorelabel->setText(player2Score);
 }
 
-void GameWindow::setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore)
+void GameWindow::setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore)       //Part
 {
     ui->questionLabel->setText(question);
     ui->option1PushButton->setText(option1);
@@ -107,13 +102,14 @@ void GameWindow::setupQuestionAnswer(QString question, QString option1, QString 
     //start Timer
 }
 
-void GameWindow::sendChoiceToServer(int choice, QString timeOfAnswer)
+void GameWindow::sendChoiceToServer(int choice, QString timeOfAnswer)   //Part
 {
+    qDebug() << "here";
     webSocket.sendTextMessage(QString::number(choice));
     webSocket.sendTextMessage(timeOfAnswer);
 }
 
-void GameWindow::checkSelectedChoice(int choice)
+void GameWindow::checkSelectedChoice(int choice)                //Part
 {
     switch (choice){
         case 1:
@@ -146,28 +142,25 @@ void GameWindow::checkSelectedChoice(int choice)
     }
 }
 
-/*
-void GameWindow::checkAnswer(int choice, int time)
+void GameWindow::handleButtonClicked(int buttonNumber)          //Ys
 {
-    QJsonObject result = getResult(choice, time);
-
-
-
-    QJsonValue correctOption = result["correctOption"];
-    switch (correctOption.toInt()){
-
-    }
-
-    proceedInGame();
+    timer->stop();
+    QString timeOfAnswer = ui->timerLabel->text();
+    //qDebug() << "Option 1 clicked";
+    std::thread forDisablingButtons(&GameWindow::disableOptionButtons, this);
+    std::thread forChecking(&GameWindow::checkSelectedChoice, this, buttonNumber);
+    sendChoiceToServer(buttonNumber, timeOfAnswer);
+    forDisablingButtons.join();
+    forChecking.join();
 }
-*/
-void GameWindow::showEvent(QShowEvent *ev)
+
+void GameWindow::showEvent(QShowEvent *ev)              //NO
 {
     QDialog::showEvent(ev);
     emit window_loaded();
 }
 
-void GameWindow::webSocketConnected()
+void GameWindow::webSocketConnected()                   //NO
 {
     qDebug() << "Conn";
     QString playerName= plr.getPlayerName();
@@ -179,12 +172,12 @@ void GameWindow::webSocketConnected()
     //webSocket.close();
 }
 
-void GameWindow::webSocketDisconnected()
+void GameWindow::webSocketDisconnected()                //NO
 {
     qDebug() << "DConn";
 }
 
-void GameWindow::onWebSocketRead(QString message)
+void GameWindow::onWebSocketRead(QString message)       //YES
 {
     currentQuestionNumber++;
     if(currentQuestionNumber < 6){
@@ -203,12 +196,16 @@ void GameWindow::onWebSocketRead(QString message)
         player1Score = rx.cap(9);
         player2Name = rx.cap(10);
         player2Score = rx.cap(11);
-        setupQuestionAnswer(question, option1, option2, option3, option4, ownScore);
+        std::thread forQA(&GameWindow::setupQuestionAnswer,this,question, option1, option2, option3, option4, ownScore);
+        std::thread forEnablingButtons(&GameWindow::enableOptionButtons, this);
+        std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
+        correctAnswer = correctOption.toInt();
+        forQA.join();
+        forEnablingButtons.join();
+        forUpdatingBoard.join();
+        ui->timerLabel->setText("30");
         starttime = new QTime(0,0,30);
         timer->start(1000);
-        correctAnswer = correctOption.toInt();
-        enableOptionButtons();
-        updateOpponentsBoard(player1Name, player1Score, player2Name, player2Score);
     }
     else {
         //Show final results
@@ -219,42 +216,22 @@ void GameWindow::onWebSocketRead(QString message)
     qDebug() << "Wrt";
 }
 */
-void GameWindow::on_option1PushButton_clicked()
+void GameWindow::on_option1PushButton_clicked()             //Ys
 {
-    timer->stop();
-    qDebug() << "Option 1 clicked";
-    disableOptionButtons();
-    QString timeOfAnswer = ui->timerLabel->text();
-    sendChoiceToServer(1, timeOfAnswer);
-    checkSelectedChoice(1);
+    handleButtonClicked(1);
 }
 
-void GameWindow::on_option2PushButton_clicked()
+void GameWindow::on_option2PushButton_clicked()             //Ys
 {
-    timer->stop();
-    disableOptionButtons();
-    qDebug() << "Option 2 clicked";
-    QString timeOfAnswer = ui->timerLabel->text();
-    sendChoiceToServer(2, timeOfAnswer);
-    checkSelectedChoice(2);
+    handleButtonClicked(2);
 }
 
-void GameWindow::on_option3PushButton_clicked()
+void GameWindow::on_option3PushButton_clicked()             //Ys
 {
-    timer->stop();
-    disableOptionButtons();
-    qDebug() << "Option 3 clicked";
-    QString timeOfAnswer = ui->timerLabel->text();
-    sendChoiceToServer(3, timeOfAnswer);
-    checkSelectedChoice(3);
+    handleButtonClicked(3);
 }
 
-void GameWindow::on_option4PushButton_clicked()
+void GameWindow::on_option4PushButton_clicked()             //Ys
 {
-    timer->stop();
-    disableOptionButtons();
-    qDebug() << "Option 4 clicked";
-    QString timeOfAnswer = ui->timerLabel->text();
-    sendChoiceToServer(4, timeOfAnswer);
-    checkSelectedChoice(4);
+    handleButtonClicked(4);
 }

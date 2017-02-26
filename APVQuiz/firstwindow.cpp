@@ -24,57 +24,49 @@ void FirstWindow::on_loginPushButton_clicked()
     QString username = ui->usernameLineEdit->text();
     QString password = ui->passwordLineEdit->text();
     QString ip = ui->iplineEdit->text();
+    QString ipServer = "http://"+ip+"/login";
 
-    //Check for internet connectivity ...
-    //if( Internet connection avaliable){
-        //Connect to server
-        QUrlQuery postData;
-        postData.addQueryItem("username", username);
-        postData.addQueryItem("password", password);
+    qDebug() << ip;
 
-        QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+    QUrlQuery postData;
+    postData.addQueryItem("username", username);
+    postData.addQueryItem("password", password);
 
-        QNetworkRequest req;
-        req.setUrl(QUrl("http://localhost:8000/login"));
-        req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-        QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
+    QNetworkRequest req;
+    req.setUrl(QUrl(ipServer));
+    req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
 
-        while(!reply->isFinished()){
-        qApp->processEvents();
-        }
+    QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
 
-        QByteArray byteReply = reply->readAll();
+    while(!reply->isFinished()){
+    qApp->processEvents();
+    }
 
-        QJsonDocument jsonReply = QJsonDocument::fromJson(byteReply);
-        QJsonObject replyObject = jsonReply.object();
-        QJsonValue value = replyObject["Auth"];
-        if( value.toBool() ){
-            //qDebug() << "The players name is " << playerName << endl;
-            //playerName = username;
-            Player p(username,password);// = new Player(username,password);
-            hide();
-            mw = new Mainwindow(p);
-            mw->exec();
-        } else{
-            QMessageBox::warning(this,"Login Problem","Please check your username and password");
-        }
-    //} else{
-    //    QMessageBox::warning(this, "Internet Connectivity","Could not connect to network. Please check internet connectivity.");
-    //}
+    QByteArray byteReply = reply->readAll();
+
+    QJsonDocument jsonReply = QJsonDocument::fromJson(byteReply);
+    QJsonObject replyObject = jsonReply.object();
+    QJsonValue value = replyObject["Auth"];
+    if( value.toBool() ){
+        Player p(username,password);
+        hide();
+        mw = new Mainwindow(p,ip);
+        mw->exec();
+    } else{
+        QMessageBox::warning(this,"Login Problem","Please check your username and password");
+    }
 }
 
 void FirstWindow::on_signUpPushButton_clicked()
 {
-   // if( Internet Connection Aavaliable){
-        //Connect to server
-        //Some stuff ...
-        hide();
-        sd = new SignUpDialog();
-        sd->exec();
-    //} else{
-        //QMessageBox::warning(this, "Internet Connectivity","Could not connect to network. Please check internet connectivity.");
-    //}
+
+    hide();
+    sd = new SignUpDialog();
+    sd->exec();
+
 }
 //abc 1
 //user pass
+//"http://localhost:8000/login"

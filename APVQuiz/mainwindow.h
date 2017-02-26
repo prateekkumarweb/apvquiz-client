@@ -14,7 +14,7 @@ class Mainwindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit Mainwindow(Player usr, QWidget *parent = 0);
+    explicit Mainwindow(Player usr, QString ip,QWidget *parent = 0);
     ~Mainwindow();
 
 private slots:
@@ -47,6 +47,7 @@ private:
     Ui::Mainwindow *ui;
     Player plr;
     GameWindow *gw;
+    QString ipaddress;
 };
 
 #endif // MAINWINDOW_H

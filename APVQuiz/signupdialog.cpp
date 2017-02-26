@@ -19,58 +19,54 @@ SignUpDialog::~SignUpDialog()
 
 void SignUpDialog::on_continuePushButton_clicked()
 {
+    QString username = ui->usernameLineEdit->text();
+    QString password = ui->passwordLineEdit->text();
+    QString confirmPassword = ui->confirPasswordLineEdit->text();
+    QString ip = ui->ipLineEdit->text();
+    QString ipServer = "http://"+ip+"/signup";
 
-        QString username = ui->usernameLineEdit->text();
-        QString password = ui->passwordLineEdit->text();
-        QString confirmPassword = ui->confirPasswordLineEdit->text();
-        QString ip = ui->ipLineEdit->text();
+    qDebug() << username;
 
-        if(password == confirmPassword){
-            QUrlQuery postData;
-            postData.addQueryItem("username", username);
-            postData.addQueryItem("password", password);
+    /*if(username.length()>10)
 
-            //Check for internet connectivity ...
-            //if(Internet Connection Avaliable){
-                //Connect to server
+    if(password == confirmPassword){
+        QUrlQuery postData;
+        postData.addQueryItem("username", username);
+        postData.addQueryItem("password", password);
+\
 
-                QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+        QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-                QNetworkRequest req;
-                req.setUrl(QUrl("http://localhost:8000/signup"));
-                req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
+        QNetworkRequest req;
+        req.setUrl(QUrl(ipServer));
+        req.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
 
-                QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
+        QNetworkReply *reply = manager->post(req,postData.toString(QUrl::FullyEncoded).toUtf8());
 
-                while(!reply->isFinished()){
-                qApp->processEvents();
-                }
+        while(!reply->isFinished()){
+        qApp->processEvents();
+        }
 
-                QByteArray byteReply = reply->readAll();
+        QByteArray byteReply = reply->readAll();
 
-                QJsonDocument jsonReply = QJsonDocument::fromJson(byteReply);
-                QJsonObject replyObject = jsonReply.object();
-                QJsonValue statusValue = replyObject["Status"];
-                QJsonValue message = replyObject["Message"];
+        QJsonDocument jsonReply = QJsonDocument::fromJson(byteReply);
+        QJsonObject replyObject = jsonReply.object();
+        QJsonValue statusValue = replyObject["Status"];
+        QJsonValue message = replyObject["Message"];
 
-                qDebug() << jsonReply;
+        qDebug() << jsonReply;
 
-                if(statusValue.toBool()){
-                    //playerName = username;
-                    Player p(username,password);
-                    hide();
-                    mw = new Mainwindow(p);
-                    mw->exec();
-                } else {
-                    QMessageBox::warning(this,"Sign Up Error",message.toString());
-                }
-
-            //} else{
-                 //QMessageBox::warning(this, "Internet Connectivity","Could not connect to network. Please check internet connectivity.");
-            //}
+        if(statusValue.toBool()){
+            Player p(username,password);
+            hide();
+            mw = new Mainwindow(p,ip);
+            mw->exec();
+        } else {
+            QMessageBox::warning(this,"Sign Up Error",message.toString());
+        }
 
         } else{
             QMessageBox::warning(this,"Password Misamtch","The passwords don't match. Please try again");
-        }
+        }*/
 
 }
