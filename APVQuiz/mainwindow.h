@@ -22,11 +22,9 @@ private slots:
 
     void on_gkPushButton_clicked();
 
-    void on_bollywoodPushButton_clicked();
-
-    void on_hollywodPushButton_clicked();
-
     void on_windowLoaded();
+
+    void on_animePushButton_clicked();
 
 private:
     void updateBoard();
