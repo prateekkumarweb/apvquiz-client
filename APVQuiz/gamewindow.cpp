@@ -203,8 +203,8 @@ void GameWindow::onWebSocketRead(QString message)       //YES
         forQA.join();
         forEnablingButtons.join();
         forUpdatingBoard.join();
-        ui->timerLabel->setText("30");
-        starttime = new QTime(0,0,30);
+        ui->timerLabel->setText("20");
+        starttime = new QTime(0,0,20);
         timer->start(1000);
     }
     else {
