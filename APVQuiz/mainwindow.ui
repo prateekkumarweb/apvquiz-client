@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QWidget" name="verticalWidget" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>

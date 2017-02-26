@@ -22,7 +22,7 @@ GameWindow::GameWindow(Player usr, QString sub, QString ip, QWidget *parent) :
     timer = new QTimer(this);
     currentQuestionNumber = 0;
     qDebug() << "ip is" << ip;
-    ipServer = "ws://"+ip+"/play";
+    ipServer = "ws://"+ip+"8000:/play";
     qDebug() << "ipServer " << ipServer;
 
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
@@ -102,10 +102,10 @@ void GameWindow::setupQuestionAnswer(QString question, QString option1, QString 
     //start Timer
 }
 
-void GameWindow::sendChoiceToServer(int choice, QString timeOfAnswer)   //Part
+void GameWindow::sendChoiceToServer(bool isCorrect, QString timeOfAnswer)   //Part
 {
-    qDebug() << "here";
-    webSocket.sendTextMessage(QString::number(choice));
+    qDebug() << "here" << isCorrect;
+    webSocket.sendTextMessage(QString::number(isCorrect));
     webSocket.sendTextMessage(timeOfAnswer);
 }
 
@@ -146,10 +146,11 @@ void GameWindow::handleButtonClicked(int buttonNumber)          //Ys
 {
     timer->stop();
     QString timeOfAnswer = ui->timerLabel->text();
+    bool isCorrect = buttonNumber==correctAnswer;
     //qDebug() << "Option 1 clicked";
     std::thread forDisablingButtons(&GameWindow::disableOptionButtons, this);
     std::thread forChecking(&GameWindow::checkSelectedChoice, this, buttonNumber);
-    sendChoiceToServer(buttonNumber, timeOfAnswer);
+    sendChoiceToServer(isCorrect, timeOfAnswer);
     forDisablingButtons.join();
     forChecking.join();
 }

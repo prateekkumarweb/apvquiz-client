@@ -23,11 +23,9 @@ void SignUpDialog::on_continuePushButton_clicked()
     QString password = ui->passwordLineEdit->text();
     QString confirmPassword = ui->confirPasswordLineEdit->text();
     QString ip = ui->ipLineEdit->text();
-    QString ipServer = "http://"+ip+"/signup";
+    QString ipServer = "http://"+ip+":8000/signup";
 
     qDebug() << username;
-
-    /*if(username.length()>10)
 
     if(password == confirmPassword){
         QUrlQuery postData;
@@ -67,6 +65,6 @@ void SignUpDialog::on_continuePushButton_clicked()
 
         } else{
             QMessageBox::warning(this,"Password Misamtch","The passwords don't match. Please try again");
-        }*/
+        }
 
 }

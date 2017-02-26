@@ -24,7 +24,7 @@ void FirstWindow::on_loginPushButton_clicked()
     QString username = ui->usernameLineEdit->text();
     QString password = ui->passwordLineEdit->text();
     QString ip = ui->iplineEdit->text();
-    QString ipServer = "http://"+ip+"/login";
+    QString ipServer = "http://"+ip+":8000/login";
 
     qDebug() << ip;
 
@@ -55,7 +55,7 @@ void FirstWindow::on_loginPushButton_clicked()
         mw = new Mainwindow(p,ip);
         mw->exec();
     } else{
-        QMessageBox::warning(this,"Login Problem","Please check your username and password");
+        QMessageBox::warning(this,"Login Problem","Please check your username, password and ip");
     }
 }
 

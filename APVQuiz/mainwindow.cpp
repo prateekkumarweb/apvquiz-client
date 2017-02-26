@@ -72,7 +72,7 @@ void Mainwindow::updateBoard()
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-    QString ipServer = "http://"+ipaddress+"/sth";
+    QString ipServer = "http://"+ipaddress+":8000/details";
 
     QNetworkRequest req;
     req.setUrl(QUrl(ipServer));
@@ -87,10 +87,12 @@ void Mainwindow::updateBoard()
     QByteArray playerInfoByteArray = reply->readAll();
     QJsonDocument playerInfo = QJsonDocument::fromJson(playerInfoByteArray);
     QJsonObject player = playerInfo.object();
-    QJsonValue displayName = player["Name"];
-    ui->welocomeLabel->setText(ui->welocomeLabel->text() + displayName.toString());
+    //QJsonValue displayName = player["Name"];
+    ui->welocomeLabel->setText(ui->welocomeLabel->text() + plr.getPlayerName());
+    QJsonValue displayGames = player["Games"];
+    ui->gamesLabel->setText(ui->gamesLabel->text() + QString::number(displayGames.toInt()));
     QJsonValue displayScore = player["Score"];
-    ui->gamesLabel->setText(ui->gamesLabel->text() + QString::number(displayScore.toInt()));
+    ui->gamesLabel->setText(ui->pointsLabel->text() + QString::number(displayScore.toInt()));
     QJsonValue displayContri = player["Contri"];
     ui->contriLabel->setText(ui->contriLabel->text() + QString::number(displayContri.toInt()));
 }
@@ -120,9 +122,11 @@ void Mainwindow::setPics()
 void Mainwindow::startGame(QString subject)
 {
     //qDebug() << "MAin";
+    hideWidgets();
     qDebug() << ipaddress;
     gw = new GameWindow(plr,subject, ipaddress);//Gamewindow(plr,subject);
     gw->exec();
+    //updateboard
 }
 
 void Mainwindow::showEvent(QShowEvent *ev)

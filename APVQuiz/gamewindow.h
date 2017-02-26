@@ -50,7 +50,7 @@ private :
 
     void setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore);
 
-    void sendChoiceToServer(int choice, QString timeOfAnswer);
+    void sendChoiceToServer(bool isCorrect, QString timeOfAnswer);
 
     void checkSelectedChoice(int choice);
 
