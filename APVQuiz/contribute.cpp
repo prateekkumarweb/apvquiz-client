@@ -44,13 +44,15 @@ void Contribute::on_pushButton_clicked()
     QUrlQuery postData;
     postData.addQueryItem("username", plr.getPlayerName());
     postData.addQueryItem("password", plr.getPassword());
-    postData.addQueryItem("question", "");//ui->questionTextEdit->text());
+    postData.addQueryItem("question", ui->questionTextEdit->toPlainText());
     postData.addQueryItem("option1", ui->option1LineEdit->text());
     postData.addQueryItem("option2", ui->option2LineEdit->text());
     postData.addQueryItem("option3", ui->option3LineEdit->text());
     postData.addQueryItem("option4", ui->option4LineEdit->text());
     postData.addQueryItem("correct", ui->choiceComboBox->currentText());
-    postData.addQueryItem("subject", ui->subjectComboBox->currentText());
+    postData.addQueryItem("subject", ui->subjectComboBox->currentText().toLower());
+
+    qDebug() << ui->subjectComboBox->currentText().toLower();
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
@@ -68,5 +70,6 @@ void Contribute::on_pushButton_clicked()
 
     QJsonDocument jsonReply = QJsonDocument::fromJson(byteReply);
     QJsonObject replyObject = jsonReply.object();
-    ui->utiiltiyTextEdit->setText("Thanks for cntributing to APV Quiz. ");
+    qDebug() << replyObject;
+    ui->utiiltiyTextEdit->setText("Thanks for contributing to APV Quiz. ");
 }

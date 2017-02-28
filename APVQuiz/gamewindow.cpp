@@ -73,6 +73,7 @@ void GameWindow::disableOptionButtons()            //Part
 
 void GameWindow::enableOptionButtons()          //Part                                                                                                          //Part
 {
+    qDebug() << "Here";
     ui->option1PushButton->setEnabled(true);
     ui->option2PushButton->setEnabled(true);
     ui->option3PushButton->setEnabled(true);
@@ -81,6 +82,7 @@ void GameWindow::enableOptionButtons()          //Part                          
     ui->option2PushButton->setStyleSheet("background-color: rgb(255,255,255);");
     ui->option3PushButton->setStyleSheet("background-color: rgb(255,255,255);");
     ui->option4PushButton->setStyleSheet("background-color: rgb(255,255,255);");
+    qDebug() << "Here";
 }
 
 void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,QString player2Name,QString player2Score)                            //Part
@@ -204,24 +206,24 @@ void GameWindow::onWebSocketRead(QString message)       //YES
             player2Name = rx.cap(10);
             player2Score = rx.cap(11);
             setupQuestionAnswer(question, option1, option2, option3, option4, ownScore);
-            enableOptionButtons();
-            updateOpponentsBoard(player1Name, player1Score, player2Name, player2Score);
+            //enableOptionButtons();
+            //updateOpponentsBoard(player1Name, player1Score, player2Name, player2Score);
             correctAnswer = correctOption.toInt();
-            /*qDebug() << "here before";
-            std::thread forQA(&GameWindow::setupQuestionAnswer,this,question, option1, option2, option3, option4, ownScore);
+            qDebug() << "here before";
+            //std::thread forQA(&GameWindow::setupQuestionAnswer,this,question, option1, option2, option3, option4, ownScore);
             qDebug() << "here after";
             std::thread forEnablingButtons(&GameWindow::enableOptionButtons, this);
-            qDebug() << "here after";
+            //qDebug() << "here after";
             std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
-            qDebug() << "here after";
-            correctAnswer = correctOption.toInt();
-            qDebug() << "here after";
-            forQA.join();
+            //qDebug() << "here after";
+            //correctAnswer = correctOption.toInt();
+            //qDebug() << "here after";
+            //forQA.join();
             qDebug() << "here after";
             forEnablingButtons.join();
-            qDebug() << "here after";
+            //qDebug() << "here after";
             forUpdatingBoard.join();
-            qDebug() << "here after";*/
+            //qDebug() << "here after";
             ui->timerLabel->setText("20");
             starttime = new QTime(0,0,20);
             timer->start(1000);
@@ -250,7 +252,7 @@ void GameWindow::onWebSocketRead(QString message)       //YES
             forUpdatingBoard.join();
         }
     }
-    else{
+    else if (currentQuestionNumber < 6){
         timer->stop();
         ui->utilityLabel->setText("Sorry ... Your opponent has left the quiz. We will add your current points to your total. ");
     }
@@ -283,7 +285,7 @@ void GameWindow::on_option4PushButton_clicked()             //Ys
 
 void GameWindow::reject()
 {
-    qDebug() << "Closing app";
-    webSocket.sendTextMessage("closed");
+    qDebug() << "Closing app rej";
+    webSocket.close();
     QDialog::reject();
 }
