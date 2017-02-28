@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "Player.h"
 #include "gamewindow.h"
+#include "contribute.h"
 
 namespace Ui {
 class Mainwindow;
@@ -26,6 +27,20 @@ private slots:
 
     void on_animePushButton_clicked();
 
+    void on_moviesPushButton_clicked();
+
+    void on_computersPushButton_clicked();
+
+    void on_sciencePushButton_clicked();
+
+    void on_gotPushButton_clicked();
+
+    void on_tiviaPushButton_clicked();
+
+    void on_sportsPushButton_clicked();
+
+    void on_contributePushButton_clicked();
+
 private:
     void updateBoard();
 
@@ -45,6 +60,7 @@ private:
     Ui::Mainwindow *ui;
     Player plr;
     GameWindow *gw;
+    Contribute *cw;
     QString ipaddress;
 };
 

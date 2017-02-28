@@ -12,9 +12,9 @@ GameWindow::GameWindow(Player usr, QString sub, QString ip, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GameWindow)
 {
-    setWindowTitle("Game");
-    Qt::WindowFlags flags = windowFlags();
-    setWindowFlags(flags | Qt::Window);
+    //setWindowTitle("Game");
+    //Qt::WindowFlags flags = windowFlags();
+    //setWindowFlags(flags | Qt::Window);
 
     plr = usr;
     subject = sub;
@@ -22,7 +22,7 @@ GameWindow::GameWindow(Player usr, QString sub, QString ip, QWidget *parent) :
     timer = new QTimer(this);
     currentQuestionNumber = 0;
     qDebug() << "ip is" << ip;
-    ipServer = "ws://"+ip+"8000:/play";
+    ipServer = "ws://"+ip+":8000/play";
     qDebug() << "ipServer " << ipServer;
 
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
@@ -35,11 +35,14 @@ GameWindow::GameWindow(Player usr, QString sub, QString ip, QWidget *parent) :
 GameWindow::~GameWindow()
 {
     //Send to server (Game left)
+    qDebug() << "Closing app";
+    webSocket.sendTextMessage("closed");
     delete ui;
 }
 
 void GameWindow::on_windowLoaded()
 {
+    ui->questionTextEdit->setReadOnly(true);
     ui->utilityLabel->setText("Looking for opponents ... ");
     disableOptionButtons();
 
@@ -53,8 +56,8 @@ void GameWindow::updateTimer()
     QString remainingTime = starttime->toString().right(2);
     ui->timerLabel->setText(remainingTime);
     if(remainingTime == "00"){
-        timer->stop();
         disableOptionButtons();
+        timer->stop();        
         sendChoiceToServer(0,"0");
         checkSelectedChoice(0);
     }
@@ -90,7 +93,7 @@ void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,Q
 
 void GameWindow::setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore)       //Part
 {
-    ui->questionLabel->setText(question);
+    ui->questionTextEdit->setText(question);
     ui->option1PushButton->setText(option1);
     ui->option2PushButton->setText(option2);
     ui->option3PushButton->setText(option3);
@@ -169,6 +172,7 @@ void GameWindow::webSocketConnected()                   //NO
     //Send subject;
     webSocket.sendTextMessage(playerName);
     webSocket.sendTextMessage(playerPassword);
+    webSocket.sendTextMessage(subject);
     webSocket.flush();
     //webSocket.close();
 }
@@ -180,37 +184,77 @@ void GameWindow::webSocketDisconnected()                //NO
 
 void GameWindow::onWebSocketRead(QString message)       //YES
 {
+    qDebug() << "message" << message;
     currentQuestionNumber++;
-    if(currentQuestionNumber < 6){
-        qDebug() << "message" << message;
-        QString question, option1, option2, option3, option4, correctOption, ownScore, player1Name, player1Score, player2Name, player2Score;
-        QRegExp rx ("(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)");
-        rx.indexIn(message);
-        question = rx.cap(1);
-        option1 = rx.cap(2);
-        option2 = rx.cap(3);
-        option3 = rx.cap(4);
-        option4 = rx.cap(5);
-        correctOption = rx.cap(6);
-        ownScore = rx.cap(7);
-        player1Name = rx.cap(8);
-        player1Score = rx.cap(9);
-        player2Name = rx.cap(10);
-        player2Score = rx.cap(11);
-        std::thread forQA(&GameWindow::setupQuestionAnswer,this,question, option1, option2, option3, option4, ownScore);
-        std::thread forEnablingButtons(&GameWindow::enableOptionButtons, this);
-        std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
-        correctAnswer = correctOption.toInt();
-        forQA.join();
-        forEnablingButtons.join();
-        forUpdatingBoard.join();
-        ui->timerLabel->setText("20");
-        starttime = new QTime(0,0,20);
-        timer->start(1000);
+    if(message != "Opponent has left the game"){
+        if(currentQuestionNumber < 6){
+
+            QString question, option1, option2, option3, option4, correctOption, ownScore, player1Name, player1Score, player2Name, player2Score;
+            QRegExp rx ("(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)");
+            rx.indexIn(message);
+            question = rx.cap(1);
+            option1 = rx.cap(2);
+            option2 = rx.cap(3);
+            option3 = rx.cap(4);
+            option4 = rx.cap(5);
+            correctOption = rx.cap(6);
+            ownScore = rx.cap(7);
+            player1Name = rx.cap(8);
+            player1Score = rx.cap(9);
+            player2Name = rx.cap(10);
+            player2Score = rx.cap(11);
+            setupQuestionAnswer(question, option1, option2, option3, option4, ownScore);
+            enableOptionButtons();
+            updateOpponentsBoard(player1Name, player1Score, player2Name, player2Score);
+            correctAnswer = correctOption.toInt();
+            /*qDebug() << "here before";
+            std::thread forQA(&GameWindow::setupQuestionAnswer,this,question, option1, option2, option3, option4, ownScore);
+            qDebug() << "here after";
+            std::thread forEnablingButtons(&GameWindow::enableOptionButtons, this);
+            qDebug() << "here after";
+            std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
+            qDebug() << "here after";
+            correctAnswer = correctOption.toInt();
+            qDebug() << "here after";
+            forQA.join();
+            qDebug() << "here after";
+            forEnablingButtons.join();
+            qDebug() << "here after";
+            forUpdatingBoard.join();
+            qDebug() << "here after";*/
+            ui->timerLabel->setText("20");
+            starttime = new QTime(0,0,20);
+            timer->start(1000);
+        }
+        else {
+            qDebug() << "message" << message;
+            QString ownScore, player1Name, player1Score, player2Name, player2Score;
+            QRegExp rx ("(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)");
+            rx.indexIn(message);
+            ownScore = rx.cap(1);
+            player1Name = rx.cap(2);
+            player1Score = rx.cap(3);
+            player2Name = rx.cap(4);
+            player2Score = rx.cap(5);
+            std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
+            ui->scoreLabel->setText(ownScore);
+            if(ownScore.toInt() >= player1Score.toInt() && ownScore.toInt() >= player2Score.toInt()){
+                ui->utilityLabel->setText("Congratulations you stood first, with final score "+ownScore);
+            }
+            else if(ownScore.toInt() < player1Score.toInt() && ownScore.toInt() < player2Score.toInt()){
+                ui->utilityLabel->setText("You finished third, with final score "+ownScore);
+            }
+            else{
+                ui->utilityLabel->setText("Congratulations you stood second, with final score "+ownScore);
+            }
+            forUpdatingBoard.join();
+        }
     }
-    else {
-        //Show final results
+    else{
+        timer->stop();
+        ui->utilityLabel->setText("Sorry ... Your opponent has left the quiz. We will add your current points to your total. ");
     }
+
 }
 /*void GameWindow::socketWrote()
 {
@@ -235,4 +279,11 @@ void GameWindow::on_option3PushButton_clicked()             //Ys
 void GameWindow::on_option4PushButton_clicked()             //Ys
 {
     handleButtonClicked(4);
+}
+
+void GameWindow::reject()
+{
+    qDebug() << "Closing app";
+    webSocket.sendTextMessage("closed");
+    QDialog::reject();
 }

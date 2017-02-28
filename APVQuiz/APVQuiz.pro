@@ -30,18 +30,21 @@ SOURCES += main.cpp\
     signupdialog.cpp \
     mainwindow.cpp \
     Player.cpp \
-    gamewindow.cpp
+    gamewindow.cpp \
+    contribute.cpp
 
 HEADERS  += firstwindow.h \
     signupdialog.h \
     mainwindow.h \
     Player.h \
-    gamewindow.h
+    gamewindow.h \
+    contribute.h
 
 FORMS    += firstwindow.ui \
     signupdialog.ui \
     mainwindow.ui \
-    gamewindow.ui
+    gamewindow.ui \
+    contribute.ui
 
 RESOURCES += \
     resource.qrc

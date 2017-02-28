@@ -41,6 +41,8 @@ private slots:
 
     void on_option4PushButton_clicked();
 
+
+
 private :
     void disableOptionButtons();
 
@@ -55,6 +57,8 @@ private :
     void checkSelectedChoice(int choice);
 
     void handleButtonClicked(int buttonNumber);
+
+    void reject();
 protected:
 
       void showEvent(QShowEvent *ev);

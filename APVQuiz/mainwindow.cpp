@@ -26,42 +26,12 @@ Mainwindow::~Mainwindow()
     delete ui;
 }
 
-void Mainwindow::on_harryPotterPushButton_clicked()
-{
-    startGame("harryPotter");
-}
-
-void Mainwindow::on_gkPushButton_clicked()
-{
-    startGame("gk");
-}
-
-void Mainwindow::on_bollywoodPushButton_clicked()
-{
-    startGame("bollywood");
-}
-
-void Mainwindow::on_hollywodPushButton_clicked()
-{
-    startGame("hollywood");
-}
-
 void Mainwindow::on_windowLoaded()
 {
-    std::thread forPics(&Mainwindow::setPics,this);
-    //std::thread forBoardUpdation(updateboard);
-    //setPics();
-    //updateboard();
     ui->welocomeLabel->setText(ui->welocomeLabel->text() + plr.getPlayerName());
-    int games = 12;
-    ui->gamesLabel->setText(ui->gamesLabel->text() + QString::number(games));
-    int pts = 12;
-    ui->pointsLabel->setText(ui->pointsLabel->text() + QString::number(pts));
-    int contri = 12;
-    ui->contriLabel->setText(ui->contriLabel->text() + QString::number(contri));
+    std::thread forPics(&Mainwindow::setPics,this);
+    updateBoard();
     forPics.join();
-    //forBoardUpdation(updateBoard);
-
 }
 
 void Mainwindow::updateBoard()
@@ -87,36 +57,29 @@ void Mainwindow::updateBoard()
     QByteArray playerInfoByteArray = reply->readAll();
     QJsonDocument playerInfo = QJsonDocument::fromJson(playerInfoByteArray);
     QJsonObject player = playerInfo.object();
-    //QJsonValue displayName = player["Name"];
-    ui->welocomeLabel->setText(ui->welocomeLabel->text() + plr.getPlayerName());
+
     QJsonValue displayGames = player["Games"];
-    ui->gamesLabel->setText(ui->gamesLabel->text() + QString::number(displayGames.toInt()));
-    QJsonValue displayScore = player["Score"];
-    ui->gamesLabel->setText(ui->pointsLabel->text() + QString::number(displayScore.toInt()));
+    ui->gamesLabel->setText("Games Played : " + QString::number(displayGames.toInt()));
+    QJsonValue displayScore = player["Points"];
+    ui->pointsLabel->setText("Points Scored : " + QString::number(displayScore.toInt()));
     QJsonValue displayContri = player["Contri"];
-    ui->contriLabel->setText(ui->contriLabel->text() + QString::number(displayContri.toInt()));
+    ui->contriLabel->setText("Contribution : " + QString::number(displayContri.toInt()));
 }
 
 void Mainwindow::hideWidgets()
 {
-   // QVBoxLayout *board = ui->boardVerticalLayout;
-   //(*board)::hide();
-   //ui->gamesGridLayout::hide();
-    //QGridLayout *g = ui->gamesGridLayout;
-    //g->hide();
-    //g->QWidget::hide();
 }
 
 void Mainwindow::setPics()
 {
-    QPixmap harryPotterPic(":/images/images/Harry-Potter-Hat.ico");
+    /*QPixmap harryPotterPic(":/images/images/Harry-Potter-Hat.ico");
     ui->harryPotterPicLabel->setPixmap(harryPotterPic.scaled(64,64,Qt::KeepAspectRatio));
     QPixmap gkPic(":/images/images/gk.png");
     ui->gkPicLabel->setPixmap(gkPic.scaled(64,64,Qt::KeepAspectRatio));
-    QPixmap bollywoodPic(":/images/images/bollywood.png");
-    ui->bollywoodPicLabel->setPixmap(bollywoodPic.scaled(64,64,Qt::KeepAspectRatio));
-    QPixmap hollywoodPic(":/images/images/hollywood.jpg");
-    ui->hollywoodPicLabel->setPixmap(hollywoodPic.scaled(64,64,Qt::KeepAspectRatio));
+    QPixmap moviesPic(":/images/images/bollywood.png");
+    ui->moviesPicLabel->setPixmap(moviesPic.scaled(64,64,Qt::KeepAspectRatio));
+    QPixmap animePic(":/images/images/hollywood.jpg");
+    ui->animePicLabel->setPixmap(animePic.scaled(64,64,Qt::KeepAspectRatio));*/
 }
 
 void Mainwindow::startGame(QString subject)
@@ -126,11 +89,62 @@ void Mainwindow::startGame(QString subject)
     qDebug() << ipaddress;
     gw = new GameWindow(plr,subject, ipaddress);//Gamewindow(plr,subject);
     gw->exec();
-    //updateboard
+    updateBoard();
 }
 
 void Mainwindow::showEvent(QShowEvent *ev)
 {
     QDialog::showEvent(ev);
     emit window_loaded();
+}
+
+void Mainwindow::on_harryPotterPushButton_clicked()
+{
+    startGame("harrypotter");
+}
+
+void Mainwindow::on_gkPushButton_clicked()
+{
+    startGame("gk");
+}
+
+void Mainwindow::on_animePushButton_clicked()
+{
+    startGame("anime");
+}
+
+void Mainwindow::on_moviesPushButton_clicked()
+{
+    startGame("movies");
+}
+
+void Mainwindow::on_computersPushButton_clicked()
+{
+    startGame("computerscience");
+}
+
+void Mainwindow::on_sciencePushButton_clicked()
+{
+    startGame("science");
+}
+
+void Mainwindow::on_gotPushButton_clicked()
+{
+    startGame("got");
+}
+
+void Mainwindow::on_tiviaPushButton_clicked()
+{
+    startGame("trivia");
+}
+
+void Mainwindow::on_sportsPushButton_clicked()
+{
+    startGame("sports");
+}
+
+void Mainwindow::on_contributePushButton_clicked()
+{
+    cw = new Contribute(plr, ipaddress);
+    cw->exec();
 }

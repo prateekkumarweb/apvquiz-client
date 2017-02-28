@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>954</width>
-    <height>716</height>
+    <height>640</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,21 +33,28 @@
     <item>
      <widget class="QLabel" name="gamesLabel">
       <property name="text">
-       <string>Games Played : </string>
+       <string/>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="pointsLabel">
       <property name="text">
-       <string>Points Scored : </string>
+       <string/>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="contriLabel">
       <property name="text">
-       <string>Contribution : </string>
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="contributePushButton">
+      <property name="text">
+       <string>Contribute</string>
       </property>
      </widget>
     </item>
@@ -59,7 +66,7 @@
      <x>229</x>
      <y>9</y>
      <width>721</width>
-     <height>701</height>
+     <height>621</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gamesGridLayout">
@@ -68,20 +75,20 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QLabel" name="hollywoodPicLabel">
+         <widget class="QLabel" name="animePicLabel">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="hollywoodLabel">
+         <widget class="QLabel" name="animeLabel">
           <property name="styleSheet">
            <string notr="true">color: rgb(204, 0, 0);
 font: 14pt &quot;Ubuntu&quot;;</string>
           </property>
           <property name="text">
-           <string>Hollywood</string>
+           <string>Anime</string>
           </property>
          </widget>
         </item>
@@ -104,7 +111,7 @@ font: 14pt &quot;Ubuntu&quot;;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="hollywodPushButton">
+       <widget class="QPushButton" name="animePushButton">
         <property name="text">
          <string>Play Now</string>
         </property>
@@ -117,20 +124,20 @@ font: 14pt &quot;Ubuntu&quot;;</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QLabel" name="bollywoodPicLabel">
+         <widget class="QLabel" name="moviesPicLabel">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="bollywoodlabel">
+         <widget class="QLabel" name="movieslabel">
           <property name="styleSheet">
            <string notr="true">color: rgb(204, 0, 0);
 font: 14pt &quot;Ubuntu&quot;;</string>
           </property>
           <property name="text">
-           <string>Bollywood</string>
+           <string>Movies</string>
           </property>
          </widget>
         </item>
@@ -153,7 +160,7 @@ font: 14pt &quot;Ubuntu&quot;;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="bollywoodPushButton">
+       <widget class="QPushButton" name="moviesPushButton">
         <property name="text">
          <string>Play Now</string>
         </property>
@@ -215,20 +222,20 @@ font: 14pt &quot;Ubuntu&quot;;</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_7">
         <item>
-         <widget class="QLabel" name="label_10">
+         <widget class="QLabel" name="gotPicLabel">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_11">
+         <widget class="QLabel" name="gotLabel">
           <property name="styleSheet">
            <string notr="true">color: rgb(204, 0, 0);
 font: 14pt &quot;Ubuntu&quot;;</string>
           </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string>GOT</string>
           </property>
          </widget>
         </item>
@@ -251,7 +258,7 @@ font: 14pt &quot;Ubuntu&quot;;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="gotPushButton">
         <property name="text">
          <string>Play Now</string>
         </property>
@@ -277,7 +284,7 @@ font: 14pt &quot;Ubuntu&quot;;</string>
 font: 14pt &quot;Ubuntu&quot;;</string>
           </property>
           <property name="text">
-           <string>GK</string>
+           <string>G K</string>
           </property>
          </widget>
         </item>
@@ -308,32 +315,25 @@ font: 14pt &quot;Ubuntu&quot;;</string>
       </item>
      </layout>
     </item>
-    <item row="3" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout_7">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_10"/>
-      </item>
-     </layout>
-    </item>
     <item row="1" column="1">
      <layout class="QVBoxLayout" name="verticalLayout_8">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <widget class="QLabel" name="label_6">
+         <widget class="QLabel" name="computersPicLabel">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_7">
+         <widget class="QLabel" name="computersLabel">
           <property name="styleSheet">
            <string notr="true">color: rgb(204, 0, 0);
 font: 14pt &quot;Ubuntu&quot;;</string>
           </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string>Computers</string>
           </property>
          </widget>
         </item>
@@ -356,7 +356,7 @@ font: 14pt &quot;Ubuntu&quot;;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="computersPushButton">
         <property name="text">
          <string>Play Now</string>
         </property>
@@ -369,20 +369,20 @@ font: 14pt &quot;Ubuntu&quot;;</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_8">
         <item>
-         <widget class="QLabel" name="label_12">
+         <widget class="QLabel" name="triviaPicLabel">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_13">
+         <widget class="QLabel" name="triviaLabel">
           <property name="styleSheet">
            <string notr="true">color: rgb(204, 0, 0);
 font: 14pt &quot;Ubuntu&quot;;</string>
           </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string>Trivia</string>
           </property>
          </widget>
         </item>
@@ -405,7 +405,7 @@ font: 14pt &quot;Ubuntu&quot;;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="tiviaPushButton">
         <property name="text">
          <string>Play Now</string>
         </property>
@@ -418,20 +418,20 @@ font: 14pt &quot;Ubuntu&quot;;</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <widget class="QLabel" name="label_8">
+         <widget class="QLabel" name="sciencePicLabel">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_9">
+         <widget class="QLabel" name="scienceLabel">
           <property name="styleSheet">
            <string notr="true">color: rgb(204, 0, 0);
 font: 14pt &quot;Ubuntu&quot;;</string>
           </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string>Science</string>
           </property>
          </widget>
         </item>
@@ -454,18 +454,11 @@ font: 14pt &quot;Ubuntu&quot;;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="sciencePushButton">
         <property name="text">
          <string>Play Now</string>
         </property>
        </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="3" column="1">
-     <layout class="QVBoxLayout" name="verticalLayout_11">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_11"/>
       </item>
      </layout>
     </item>
@@ -474,20 +467,20 @@ font: 14pt &quot;Ubuntu&quot;;</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_9">
         <item>
-         <widget class="QLabel" name="label_14">
+         <widget class="QLabel" name="sportsPiclabel">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_15">
+         <widget class="QLabel" name="sportsLabel">
           <property name="styleSheet">
            <string notr="true">color: rgb(204, 0, 0);
 font: 14pt &quot;Ubuntu&quot;;</string>
           </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string>Sports</string>
           </property>
          </widget>
         </item>
@@ -510,18 +503,11 @@ font: 14pt &quot;Ubuntu&quot;;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QPushButton" name="sportsPushButton">
         <property name="text">
          <string>Play Now</string>
         </property>
        </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="3" column="2">
-     <layout class="QVBoxLayout" name="verticalLayout_13">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_12"/>
       </item>
      </layout>
     </item>
@@ -531,13 +517,13 @@ font: 14pt &quot;Ubuntu&quot;;</string>
  <tabstops>
   <tabstop>harryPotterPushButton</tabstop>
   <tabstop>gkPushButton</tabstop>
-  <tabstop>bollywoodPushButton</tabstop>
-  <tabstop>hollywodPushButton</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>pushButton_4</tabstop>
-  <tabstop>pushButton_5</tabstop>
-  <tabstop>pushButton_6</tabstop>
-  <tabstop>pushButton_7</tabstop>
+  <tabstop>moviesPushButton</tabstop>
+  <tabstop>animePushButton</tabstop>
+  <tabstop>computersPushButton</tabstop>
+  <tabstop>sciencePushButton</tabstop>
+  <tabstop>gotPushButton</tabstop>
+  <tabstop>tiviaPushButton</tabstop>
+  <tabstop>sportsPushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>
