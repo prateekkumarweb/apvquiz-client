@@ -4,7 +4,6 @@
 
 int main(int argc, char *argv[])
 {
-    //QString playerName ;//= "Vaibhav";
 
     QApplication a(argc, argv);
     FirstWindow w;

@@ -72,7 +72,6 @@ void Mainwindow::hideWidgets()
 
 void Mainwindow::setPics()
 {
-    ui->harryPotterLabel->setText("Potter");
     /*QPixmap harryPotterPic(":/images/images/Harry-Potter-Hat.ico");
     ui->harryPotterPicLabel->setPixmap(harryPotterPic.scaled(64,64,Qt::KeepAspectRatio));
     QPixmap gkPic(":/images/images/gk.png");
