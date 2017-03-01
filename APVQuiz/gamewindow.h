@@ -66,6 +66,8 @@ protected:
 signals:
       void window_loaded();
 
+      void changeQuestionTextEdit(const QString &s);
+
 private:
     Ui::GameWindow *ui;
     Player plr;

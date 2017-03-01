@@ -26,6 +26,7 @@ GameWindow::GameWindow(Player usr, QString sub, QString ip, QWidget *parent) :
     qDebug() << "ipServer " << ipServer;
 
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
+    connect(this, &GameWindow::changeQuestionTextEdit, ui->questionTextEdit, &QTextEdit::setText);
     connect(&webSocket,&QWebSocket::connected, this, &GameWindow::webSocketConnected);
     connect(&webSocket,&QWebSocket::disconnected, this, &GameWindow::webSocketDisconnected);
     connect(&webSocket,&QWebSocket::textMessageReceived, this, &GameWindow::onWebSocketRead);
@@ -95,7 +96,7 @@ void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,Q
 
 void GameWindow::setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore)       //Part
 {
-    ui->questionTextEdit->setText(question);
+    emit changeQuestionTextEdit(question);
     ui->option1PushButton->setText(option1);
     ui->option2PushButton->setText(option2);
     ui->option3PushButton->setText(option3);
@@ -103,13 +104,10 @@ void GameWindow::setupQuestionAnswer(QString question, QString option1, QString 
     ui->scoreLabel->setText(ownScore);
 
     ui->utilityLabel->setText("");
-
-    //start Timer
 }
 
 void GameWindow::sendChoiceToServer(bool isCorrect, QString timeOfAnswer)   //Part
 {
-    qDebug() << "here" << isCorrect;
     webSocket.sendTextMessage(QString::number(isCorrect));
     webSocket.sendTextMessage(timeOfAnswer);
 }
@@ -171,17 +169,15 @@ void GameWindow::webSocketConnected()                   //NO
     qDebug() << "Conn";
     QString playerName= plr.getPlayerName();
     QString playerPassword = plr.getPassword();
-    //Send subject;
     webSocket.sendTextMessage(playerName);
     webSocket.sendTextMessage(playerPassword);
     webSocket.sendTextMessage(subject);
     webSocket.flush();
-    //webSocket.close();
 }
 
 void GameWindow::webSocketDisconnected()                //NO
 {
-    qDebug() << "DConn";
+    qDebug() << "WebSocket DisConnected";
 }
 
 void GameWindow::onWebSocketRead(QString message)       //YES
@@ -207,14 +203,14 @@ void GameWindow::onWebSocketRead(QString message)       //YES
             player2Score = rx.cap(11);
 
             std::thread forEnablingButtons(&GameWindow::enableOptionButtons, this);
-
             std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
+            std::thread forQA(&GameWindow::setupQuestionAnswer, this,question, option1, option2, option3, option4, ownScore);
 
             correctAnswer = correctOption.toInt();
-            setupQuestionAnswer(question, option1, option2, option3, option4, ownScore);
 
             forEnablingButtons.join();
             forUpdatingBoard.join();
+            forQA.join();
 
             ui->timerLabel->setText("20");
             starttime = new QTime(0,0,20);
@@ -246,15 +242,11 @@ void GameWindow::onWebSocketRead(QString message)       //YES
     }
     else if (currentQuestionNumber < 6){
         timer->stop();
+        disableOptionButtons();
         ui->utilityLabel->setText("Sorry ... Your opponent has left the quiz. We will add your current points to your total. ");
     }
 
 }
-/*void GameWindow::socketWrote()
-{
-    qDebug() << "Wrt";
-}
-*/
 void GameWindow::on_option1PushButton_clicked()             //Ys
 {
     handleButtonClicked(1);
