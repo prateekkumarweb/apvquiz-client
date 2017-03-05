@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 17pt &quot;Ubuntu&quot;;</string>
+    <string notr="true">font: 15pt &quot;Ubuntu&quot;;</string>
    </property>
    <property name="text">
     <string/>

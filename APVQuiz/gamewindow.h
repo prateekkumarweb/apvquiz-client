@@ -66,6 +66,8 @@ protected:
 signals:
       void window_loaded();
 
+      void changeQuestionTextEdit(const QString &s);
+
 private:
     Ui::GameWindow *ui;
     Player plr;
@@ -75,8 +77,6 @@ private:
     int currentQuestionNumber;
     int correctAnswer;
     QString ipServer;
-    //int currentRequestCondition;    //0 Question 1 Answer 2 Result
-    //QTcpSocket *socket;
     QWebSocket webSocket;
 };
 

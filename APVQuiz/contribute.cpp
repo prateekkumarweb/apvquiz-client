@@ -37,6 +37,7 @@ Contribute::~Contribute()
 
 void Contribute::on_pushButton_clicked()
 {
+
     QString ipServer = "http://"+ip+":8000/contri";
 
     //qDebug() << ip;
