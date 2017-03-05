@@ -1,3 +1,13 @@
 <RCC>
-    <qresource prefix="/images"/>
+    <qresource prefix="/images">
+        <file>images/cs.png</file>
+        <file>images/got.png</file>
+        <file>images/anime.png</file>
+        <file>images/science.png</file>
+        <file>images/sports.png</file>
+        <file>images/trivia.png</file>
+        <file>images/GK.png</file>
+        <file>images/HarryPotter.png</file>
+        <file>images/movies.png</file>
+    </qresource>
 </RCC>

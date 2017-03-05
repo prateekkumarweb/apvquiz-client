@@ -72,14 +72,24 @@ void Mainwindow::hideWidgets()
 
 void Mainwindow::setPics()
 {
-    /*QPixmap harryPotterPic(":/images/images/Harry-Potter-Hat.ico");
-    ui->harryPotterPicLabel->setPixmap(harryPotterPic.scaled(64,64,Qt::KeepAspectRatio));
-    QPixmap gkPic(":/images/images/gk.png");
-    ui->gkPicLabel->setPixmap(gkPic.scaled(64,64,Qt::KeepAspectRatio));
-    QPixmap moviesPic(":/images/images/bollywood.png");
-    ui->moviesPicLabel->setPixmap(moviesPic.scaled(64,64,Qt::KeepAspectRatio));
-    QPixmap animePic(":/images/images/hollywood.jpg");
-    ui->animePicLabel->setPixmap(animePic.scaled(64,64,Qt::KeepAspectRatio));*/
+    QPixmap harryPotterPic(":/images/images/HarryPotter.png");
+    ui->harryPotterPicLabel->setPixmap(harryPotterPic.scaled(100,100,Qt::KeepAspectRatio));
+    QPixmap gkPic(":/images/images/GK.png");
+    ui->gkPicLabel->setPixmap(gkPic.scaled(100,100,Qt::KeepAspectRatio));
+    QPixmap moviesPic(":/images/images/movies.png");
+    ui->moviesPicLabel->setPixmap(moviesPic.scaled(100,100,Qt::KeepAspectRatio));
+    QPixmap animePic(":/images/images/anime.png");
+    ui->animePicLabel->setPixmap(animePic.scaled(100,100,Qt::KeepAspectRatio));
+    QPixmap computersPic(":/images/images/cs.png");
+    ui->computersPicLabel->setPixmap(computersPic.scaled(100,100,Qt::KeepAspectRatio));
+    QPixmap sciencePic(":/images/images/science.png");
+    ui->sciencePicLabel->setPixmap(sciencePic.scaled(100,100,Qt::KeepAspectRatio));
+    QPixmap gotPic(":/images/images/got.png");
+    ui->gotPicLabel->setPixmap(gotPic.scaled(100,100,Qt::KeepAspectRatio));
+    QPixmap triviaPic(":/images/images/trivia.png");
+    ui->triviaPicLabel->setPixmap(triviaPic.scaled(100,100,Qt::KeepAspectRatio));
+    QPixmap sportsPic(":/images/images/sports.png");
+    ui->sportsPiclabel->setPixmap(sportsPic.scaled(100,100,Qt::KeepAspectRatio));
 }
 
 void Mainwindow::startGame(QString subject)
