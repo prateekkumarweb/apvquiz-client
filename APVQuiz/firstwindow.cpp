@@ -2,7 +2,7 @@
  * @file firstwindow.cpp
  * @author Vaibhav
  * @date 5 Mar 2017
- * @brief manages the openning first window
+ * @brief manages the opening first window
  *
  * This manages the first window.
  */
@@ -48,7 +48,7 @@ void FirstWindow::on_loginPushButton_clicked()
     QString ip = ui->iplineEdit->text();
     QString ipServer = "http://"+ip+":8000/login";
 
-    /* Create the data that is to pe posted*/
+    /* Create the data that is to be posted*/
     QUrlQuery postData;
     postData.addQueryItem("username", username);
     postData.addQueryItem("password", password);

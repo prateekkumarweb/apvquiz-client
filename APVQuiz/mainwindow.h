@@ -4,7 +4,7 @@
  * @date 5 Mar 2017
  * @brief manages the openning main window
  *
- * Header file for the first window.
+ * Header file for the main window.
  */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
@@ -18,9 +18,18 @@ namespace Ui {
 class Mainwindow;
 }
 
+/**
+ * @brief Mainwindow class.
+ *
+ * Manages all activities of main window. Is live whenever main window is open.
+ */
 class Mainwindow : public QDialog
 {
     Q_OBJECT
+
+    /* Documentation for each of the function can be obtained in the
+     * corresponding mainwindow.cpp. The header contains all declaration.
+     */
 
 public:
     explicit Mainwindow(Player usr, QString ip,QWidget *parent = 0);
@@ -52,8 +61,6 @@ private slots:
 private:
     void updateBoard();
 
-    void hideWidgets();
-
     void setPics();
 
     void startGame(QString subject);
@@ -65,11 +72,11 @@ signals:
       void window_loaded();
 
 private:
-    Ui::Mainwindow *ui;
-    Player plr;
-    GameWindow *gw;
-    Contribute *cw;
-    QString ipaddress;
+    Ui::Mainwindow *ui; //!< Ui for this class
+    Player plr; //!< A Player plr
+    GameWindow *gw; //!< member variable for creating game window
+    Contribute *cw; //!< member variable for creating contribution window
+    QString ipaddress; //!< String for ipAddress
 };
 
 #endif // MAINWINDOW_H

@@ -54,7 +54,7 @@ private slots:
 
 private:
 
-    Ui::FirstWindow *ui; //!< Ui for fthis class
+    Ui::FirstWindow *ui; //!< Ui for this class
     SignUpDialog *sd; //!< member variable for creating signup dialog
     Mainwindow *mw; //!< member variable for creating mainwindow
 };
