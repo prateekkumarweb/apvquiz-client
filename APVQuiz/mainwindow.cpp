@@ -66,28 +66,16 @@ void Mainwindow::updateBoard()
     ui->contriLabel->setText("Contribution : " + QString::number(displayContri.toInt()));
 }
 
-void Mainwindow::hideWidgets()
-{
-}
-
 void Mainwindow::setPics()
 {
-    /*QPixmap harryPotterPic(":/images/images/Harry-Potter-Hat.ico");
-    ui->harryPotterPicLabel->setPixmap(harryPotterPic.scaled(64,64,Qt::KeepAspectRatio));
-    QPixmap gkPic(":/images/images/gk.png");
-    ui->gkPicLabel->setPixmap(gkPic.scaled(64,64,Qt::KeepAspectRatio));
-    QPixmap moviesPic(":/images/images/bollywood.png");
-    ui->moviesPicLabel->setPixmap(moviesPic.scaled(64,64,Qt::KeepAspectRatio));
-    QPixmap animePic(":/images/images/hollywood.jpg");
-    ui->animePicLabel->setPixmap(animePic.scaled(64,64,Qt::KeepAspectRatio));*/
+
 }
 
 void Mainwindow::startGame(QString subject)
 {
-    //qDebug() << "MAin";
     hideWidgets();
     qDebug() << ipaddress;
-    gw = new GameWindow(plr,subject, ipaddress);//Gamewindow(plr,subject);
+    gw = new GameWindow(plr,subject, ipaddress);
     gw->exec();
     updateBoard();
 }
