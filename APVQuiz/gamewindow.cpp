@@ -338,12 +338,22 @@ void GameWindow::webSocketDisconnected()
 void GameWindow::onWebSocketRead(QString message)
 {
     qDebug() << "message" << message;
+    /* Increment currentQuestionNumber */
     currentQuestionNumber++;
+
+    /*If the message is not Opponent has left the game */
     if(message != "Opponent has left the game"){
+
+        /*If the currentQuestionNumber is less than 6 */
         if(currentQuestionNumber < 6){
 
+            /* Declare variables */
             QString question, option1, option2, option3, option4, correctOption, ownScore, player1Name, player1Score, player2Name, player2Score;
+
+            /*create a regular expression to parse the message */
             QRegExp rx ("(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)");
+
+            /*Parse the message and store them in appropriate strings */
             rx.indexIn(message);
             question = rx.cap(1);
             option1 = rx.cap(2);
@@ -357,68 +367,124 @@ void GameWindow::onWebSocketRead(QString message)
             player2Name = rx.cap(10);
             player2Score = rx.cap(11);
 
-            std::thread forEnablingButtons(&GameWindow::enableOptionButtons, this);
+            /* Start a thread that enables the option buttons */
+            //std::thread forEnablingButtons(&GameWindow::enableOptionButtons, this);
+
+            enableOptionButtons();
+
+            /*Start a thread that updates the Opponents' board */
             std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
-            //std::thread forQA(&GameWindow::setupQuestionAnswer, this,question, option1, option2, option3, option4, ownScore);
+
+            /*Meanwhile on the parent thread setup the question, options and the score */
             setupQuestionAnswer(question, option1, option2, option3, option4, ownScore);
 
+            /* Set the member variable */
             correctAnswer = correctOption.toInt();
 
-            forEnablingButtons.join();
-            forUpdatingBoard.join();
-            //forQA.join();
+            /*Wait for the thread that enabled buttons to complete */
+            //forEnablingButtons.join();
 
+            /* Wait for the thread that updated the opponents board to complete */
+            forUpdatingBoard.join();
+
+            /* Set the timer value to 20 */
             ui->timerLabel->setText("20");
+
+            /*Initialize the starttime variable */
             starttime = new QTime(0,0,20);
+
+            /* Strat the timer */
             timer->start(1000);
         }
         else {
-            qDebug() << "message" << message;
+            //qDebug() << "message" << message;
+
+            /* Declare variables */
             QString ownScore, player1Name, player1Score, player2Name, player2Score;
+
+            /*create a regular expression to parse the message */
             QRegExp rx ("(.*)@#@(.*)@#@(.*)@#@(.*)@#@(.*)");
+
+            /*Parse the message and store them in appropriate strings */
             rx.indexIn(message);
             ownScore = rx.cap(1);
             player1Name = rx.cap(2);
             player1Score = rx.cap(3);
             player2Name = rx.cap(4);
             player2Score = rx.cap(5);
+
+            /*Start a thread that updates the Opponents' board */
             std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
+
+            /*Meanwhile on the parent thread compare own scrore with opponents' and displaay the final result */
             ui->scoreLabel->setText(ownScore);
             if(ownScore.toInt() >= player1Score.toInt() && ownScore.toInt() >= player2Score.toInt()){
+                /* User stands first */
                 ui->utilityLabel->setText("Congratulations you stood first, with final score "+ownScore);
             }
             else if(ownScore.toInt() < player1Score.toInt() && ownScore.toInt() < player2Score.toInt()){
+                /* User stands third */
                 ui->utilityLabel->setText("You finished third, with final score "+ownScore);
             }
             else{
+                /* User stands second */
                 ui->utilityLabel->setText("Congratulations you stood second, with final score "+ownScore);
             }
+
+            /* Wait for the thread that updated the opponents board to complete */
             forUpdatingBoard.join();
         }
     }
     else if (currentQuestionNumber < 6){
+        /*In case the questions are not over but some opponent left the game */
+
+        /*Stop the timer*/
         timer->stop();
+
+        /*Disable the option buttons */
         disableOptionButtons();
+
+        /* Display utility message */
         ui->utilityLabel->setText("Sorry ... Your opponent has left the quiz. We will add your current points to your total. ");
     }
-
 }
-void GameWindow::on_option1PushButton_clicked()             //Ys
+
+/**
+ * @brief SLOT to handle SIGNAL option1 button click
+ *
+ * Handles the button click
+ */
+void GameWindow::on_option1PushButton_clicked()
 {
     handleButtonClicked(1);
 }
 
-void GameWindow::on_option2PushButton_clicked()             //Ys
+/**
+ * @brief SLOT to handle SIGNAL option2 button click
+ *
+ * Handles the button click
+ */
+void GameWindow::on_option2PushButton_clicked()
 {
     handleButtonClicked(2);
 }
 
-void GameWindow::on_option3PushButton_clicked()             //Ys
+/**
+ * @brief SLOT to handle SIGNAL option3 button click
+ *
+ * Handles the button click
+ */
+void GameWindow::on_option3PushButton_clicked()
 {
     handleButtonClicked(3);
 }
 
-void GameWindow::on_option4PushButton_clicked()             //Ys
+/**
+ * @brief SLOT to handle SIGNAL option4 button click
+ *
+ * Handles the button click
+ */
+void GameWindow::on_option4PushButton_clicked()
 {
     handleButtonClicked(4);
 }
