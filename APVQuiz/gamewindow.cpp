@@ -204,13 +204,14 @@ void GameWindow::onWebSocketRead(QString message)       //YES
 
             std::thread forEnablingButtons(&GameWindow::enableOptionButtons, this);
             std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
-            std::thread forQA(&GameWindow::setupQuestionAnswer, this,question, option1, option2, option3, option4, ownScore);
+            //std::thread forQA(&GameWindow::setupQuestionAnswer, this,question, option1, option2, option3, option4, ownScore);
+            setupQuestionAnswer(question, option1, option2, option3, option4, ownScore);
 
             correctAnswer = correctOption.toInt();
 
             forEnablingButtons.join();
             forUpdatingBoard.join();
-            forQA.join();
+            //forQA.join();
 
             ui->timerLabel->setText("20");
             starttime = new QTime(0,0,20);

@@ -1,3 +1,11 @@
+/**
+ * @file mainwindow.h
+ * @author Vaibhav
+ * @date 5 Mar 2017
+ * @brief manages the openning main window
+ *
+ * Header file for the first window.
+ */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

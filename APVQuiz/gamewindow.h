@@ -77,8 +77,6 @@ private:
     int currentQuestionNumber;
     int correctAnswer;
     QString ipServer;
-    //int currentRequestCondition;    //0 Question 1 Answer 2 Result
-    //QTcpSocket *socket;
     QWebSocket webSocket;
 };
 
