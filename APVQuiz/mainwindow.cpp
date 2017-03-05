@@ -121,22 +121,39 @@ void Mainwindow::updateBoard()
  */
 void Mainwindow::setPics()
 {
+    /* Get the pixmap of harry potter and display at appropriate position */
     QPixmap harryPotterPic(":/images/images/HarryPotter.png");
     ui->harryPotterPicLabel->setPixmap(harryPotterPic.scaled(100,100,Qt::KeepAspectRatio));
+
+    /* Get the pixmap of gk and display at appropriate position */
     QPixmap gkPic(":/images/images/GK.png");
     ui->gkPicLabel->setPixmap(gkPic.scaled(100,100,Qt::KeepAspectRatio));
+
+    /* Get the pixmap of movies and display at appropriate position */
     QPixmap moviesPic(":/images/images/movies.png");
     ui->moviesPicLabel->setPixmap(moviesPic.scaled(100,100,Qt::KeepAspectRatio));
+
+    /* Get the pixmap of anime and display at appropriate position */
     QPixmap animePic(":/images/images/anime.png");
     ui->animePicLabel->setPixmap(animePic.scaled(100,100,Qt::KeepAspectRatio));
+
+    /* Get the pixmap of computers and display at appropriate position */
     QPixmap computersPic(":/images/images/cs.png");
     ui->computersPicLabel->setPixmap(computersPic.scaled(100,100,Qt::KeepAspectRatio));
+
+    /* Get the pixmap of  and display at appropriate position */
     QPixmap sciencePic(":/images/images/science.png");
     ui->sciencePicLabel->setPixmap(sciencePic.scaled(100,100,Qt::KeepAspectRatio));
+
+    /* Get the pixmap of got and display at appropriate position */
     QPixmap gotPic(":/images/images/got.png");
     ui->gotPicLabel->setPixmap(gotPic.scaled(100,100,Qt::KeepAspectRatio));
+
+    /* Get the pixmap of trivia and display at appropriate position */
     QPixmap triviaPic(":/images/images/trivia.png");
     ui->triviaPicLabel->setPixmap(triviaPic.scaled(100,100,Qt::KeepAspectRatio));
+
+    /* Get the pixmap of sports and display at appropriate position */
     QPixmap sportsPic(":/images/images/sports.png");
     ui->sportsPiclabel->setPixmap(sportsPic.scaled(100,100,Qt::KeepAspectRatio));
 }

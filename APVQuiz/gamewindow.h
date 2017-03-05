@@ -33,8 +33,6 @@ private slots:
 
     void onWebSocketRead(QString message);
 
-    //void socketWrote();
-
     void on_option2PushButton_clicked();
 
     void on_option3PushButton_clicked();
