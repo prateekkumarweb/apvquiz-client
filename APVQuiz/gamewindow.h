@@ -1,3 +1,11 @@
+/**
+ * @file gamewindow.h
+ * @author Vaibhav
+ * @date 5 Mar 2017
+ * @brief manages the openning first window
+ *
+ * Header file for the first window.
+ */
 #ifndef GAMEWINDOW_H
 #define GAMEWINDOW_H
 
@@ -12,9 +20,18 @@ namespace Ui {
 class GameWindow;
 }
 
+/**
+ * @brief Gamewindow class.
+ *
+ * Manages all activities of game window. Is live whenever game window is open.
+ */
 class GameWindow : public QDialog
 {
     Q_OBJECT
+
+    /* Documentation for each of the function can be obtained in the
+     * corresponding mainwindow.cpp. The header contains all declaration.
+     */
 
 public:
     explicit GameWindow(Player usr, QString sub, QString ip, QWidget *parent = 0);
@@ -67,15 +84,15 @@ signals:
       void changeQuestionTextEdit(const QString &s);
 
 private:
-    Ui::GameWindow *ui;
-    Player plr;
-    QString subject;
-    QTimer *timer;
-    QTime *starttime;
-    int currentQuestionNumber;
-    int correctAnswer;
-    QString ipServer;
-    QWebSocket webSocket;
+    Ui::GameWindow *ui; //!< Ui for this class
+    Player plr; //!< A Player plr
+    QString subject; //!< A String for subject
+    QTimer *timer; //!< A QTimer pointer timer
+    QTime *starttime; //!< A QTime pointer startttime
+    int currentQuestionNumber; //!< An int for the current question number
+    int correctAnswer; //!< An int for correct answer
+    QString ipServer; //!< A string for ip
+    QWebSocket webSocket; //!< A websocket for communication
 };
 
 #endif // GAMEWINDOW_H

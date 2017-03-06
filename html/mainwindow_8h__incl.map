@@ -1,5 +1,5 @@
-<map id="APVQuiz/mainwindow.h" name="APVQuiz/mainwindow.h">
+<map id="mainwindow.h" name="mainwindow.h">
 <area shape="rect" id="node3" href="$_player_8h_source.html" title="Player.h" alt="" coords="99,155,170,181"/>
-<area shape="rect" id="node5" href="$gamewindow_8h_source.html" title="gamewindow.h" alt="" coords="263,80,372,107"/>
-<area shape="rect" id="node11" href="$contribute_8h_source.html" title="contribute.h" alt="" coords="77,80,168,107"/>
+<area shape="rect" id="node5" href="$gamewindow_8h.html" title="manages the openning first window " alt="" coords="263,80,372,107"/>
+<area shape="rect" id="node11" href="$contribute_8h.html" title="manages the openning contribute dialog " alt="" coords="77,80,168,107"/>
 </map>

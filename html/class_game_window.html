@@ -24,7 +24,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">APV Quiz
+   &#160;<span id="projectnumber">1</span>
    </div>
+   <div id="projectbrief">A multiplayer multithreaded quizzing application</div>
   </td>
  </tr>
  </tbody>
@@ -91,15 +93,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">GameWindow Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Gamewindow class.  
+ <a href="class_game_window.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="gamewindow_8h_source.html">gamewindow.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GameWindow:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_game_window__inherit__graph.png" border="0" usemap="#_game_window_inherit__map" alt="Inheritance graph"/></div>
+<map name="_game_window_inherit__map" id="_game_window_inherit__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for GameWindow:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_game_window__coll__graph.png" border="0" usemap="#_game_window_coll__map" alt="Collaboration graph"/></div>
+<map name="_game_window_coll__map" id="_game_window_coll__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
@@ -113,19 +124,121 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>changeQuestionTextEdi
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abcc26a7972170f5cba3fd1e7afc74501"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abcc26a7972170f5cba3fd1e7afc74501"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GameWindow</b> (<a class="el" href="class_player.html">Player</a> usr, QString sub, QString ip, QWidget *parent=0)</td></tr>
+<tr class="memitem:abcc26a7972170f5cba3fd1e7afc74501"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_window.html#abcc26a7972170f5cba3fd1e7afc74501">GameWindow</a> (<a class="el" href="class_player.html">Player</a> usr, QString sub, QString ip, QWidget *parent=0)</td></tr>
+<tr class="memdesc:abcc26a7972170f5cba3fd1e7afc74501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for gamewindow.  <a href="#abcc26a7972170f5cba3fd1e7afc74501">More...</a><br /></td></tr>
 <tr class="separator:abcc26a7972170f5cba3fd1e7afc74501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55b071c0390e45c064a160c1e6baaa08"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_window.html#a55b071c0390e45c064a160c1e6baaa08">~GameWindow</a> ()</td></tr>
+<tr class="memdesc:a55b071c0390e45c064a160c1e6baaa08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distructor for gamewindow.  <a href="#a55b071c0390e45c064a160c1e6baaa08">More...</a><br /></td></tr>
+<tr class="separator:a55b071c0390e45c064a160c1e6baaa08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a0763501894bd0e4280c6bb2998e19b78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0763501894bd0e4280c6bb2998e19b78"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>showEvent</b> (QShowEvent *ev)</td></tr>
+<tr class="memitem:a0763501894bd0e4280c6bb2998e19b78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_window.html#a0763501894bd0e4280c6bb2998e19b78">showEvent</a> (QShowEvent *ev)</td></tr>
+<tr class="memdesc:a0763501894bd0e4280c6bb2998e19b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overridden showEvent function.  <a href="#a0763501894bd0e4280c6bb2998e19b78">More...</a><br /></td></tr>
 <tr class="separator:a0763501894bd0e4280c6bb2998e19b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Gamewindow class. </p>
+<p>Manages all activities of game window. Is live whenever game window is open. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="abcc26a7972170f5cba3fd1e7afc74501"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameWindow::GameWindow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_player.html">Player</a>&#160;</td>
+          <td class="paramname"><em>usr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>sub</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>ip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for gamewindow. </p>
+<p>Sets up the UI, initializes member varibles formm the passed arguments and connects signals to slots </p>
+
+</div>
+</div>
+<a class="anchor" id="a55b071c0390e45c064a160c1e6baaa08"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameWindow::~GameWindow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Distructor for gamewindow. </p>
+<p>ends UI </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a0763501894bd0e4280c6bb2998e19b78"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameWindow::showEvent </td>
+          <td>(</td>
+          <td class="paramtype">QShowEvent *&#160;</td>
+          <td class="paramname"><em>ev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overridden showEvent function. </p>
+<p>Overridden showEvent function first calls its parent's showEvent function and then emitss SIGNAL window_loaded() </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>APVQuiz/<a class="el" href="gamewindow_8h_source.html">gamewindow.h</a></li>
-<li>APVQuiz/gamewindow.cpp</li>
+<li><a class="el" href="gamewindow_8h_source.html">gamewindow.h</a></li>
+<li><a class="el" href="gamewindow_8cpp.html">gamewindow.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

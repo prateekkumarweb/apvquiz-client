@@ -1,8 +1,8 @@
-<map id="APVQuiz/firstwindow.cpp" name="APVQuiz/firstwindow.cpp">
+<map id="firstwindow.cpp" name="firstwindow.cpp">
 <area shape="rect" id="node2" href="$firstwindow_8h.html" title="manages the openning first window " alt="" coords="185,80,284,107"/>
-<area shape="rect" id="node4" href="$signupdialog_8h_source.html" title="signupdialog.h" alt="" coords="137,155,242,181"/>
+<area shape="rect" id="node4" href="$signupdialog_8h.html" title="manages the openning first window " alt="" coords="137,155,242,181"/>
 <area shape="rect" id="node6" href="$mainwindow_8h.html" title="manages the openning main window " alt="" coords="182,229,287,256"/>
 <area shape="rect" id="node7" href="$_player_8h_source.html" title="Player.h" alt="" coords="158,379,229,405"/>
-<area shape="rect" id="node9" href="$gamewindow_8h_source.html" title="gamewindow.h" alt="" coords="324,304,433,331"/>
-<area shape="rect" id="node15" href="$contribute_8h_source.html" title="contribute.h" alt="" coords="148,304,239,331"/>
+<area shape="rect" id="node9" href="$gamewindow_8h.html" title="manages the openning first window " alt="" coords="324,304,433,331"/>
+<area shape="rect" id="node15" href="$contribute_8h.html" title="manages the openning contribute dialog " alt="" coords="148,304,239,331"/>
 </map>

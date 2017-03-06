@@ -489,9 +489,22 @@ void GameWindow::on_option4PushButton_clicked()
     handleButtonClicked(4);
 }
 
+/**
+ * @brief Overridden reject function
+ *
+ * Overridden reject function first calls its
+ * parent's showEvent function and then emitss SIGNAL
+ * window_loaded()
+ */
 void GameWindow::reject()
 {
     qDebug() << "Closing app rej";
+
+    /* Close the websocket*/
     webSocket.close();
+
+    /*Call the parent reject */
     QDialog::reject();
 }
+
+// 2 + (1+1)

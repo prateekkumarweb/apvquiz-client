@@ -24,7 +24,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">APV Quiz
+   &#160;<span id="projectnumber">1</span>
    </div>
+   <div id="projectbrief">A multiplayer multithreaded quizzing application</div>
   </td>
  </tr>
  </tbody>
@@ -91,15 +93,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Mainwindow Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_mainwindow.html" title="Mainwindow class. ">Mainwindow</a> class.  
+ <a href="class_mainwindow.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="mainwindow_8h_source.html">mainwindow.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Mainwindow:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_mainwindow__inherit__graph.png" border="0" usemap="#_mainwindow_inherit__map" alt="Inheritance graph"/></div>
+<map name="_mainwindow_inherit__map" id="_mainwindow_inherit__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Mainwindow:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_mainwindow__coll__graph.png" border="0" usemap="#_mainwindow_coll__map" alt="Collaboration graph"/></div>
+<map name="_mainwindow_coll__map" id="_mainwindow_coll__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
@@ -110,19 +121,94 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>window_loaded</b> ()<
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3652cf168bb5c3fe015002525d2cbf32"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3652cf168bb5c3fe015002525d2cbf32"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Mainwindow</b> (<a class="el" href="class_player.html">Player</a> usr, QString ip, QWidget *parent=0)</td></tr>
+<tr class="memitem:a3652cf168bb5c3fe015002525d2cbf32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mainwindow.html#a3652cf168bb5c3fe015002525d2cbf32">Mainwindow</a> (<a class="el" href="class_player.html">Player</a> usr, QString ip, QWidget *parent=0)</td></tr>
+<tr class="memdesc:a3652cf168bb5c3fe015002525d2cbf32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for mainwindow.  <a href="#a3652cf168bb5c3fe015002525d2cbf32">More...</a><br /></td></tr>
 <tr class="separator:a3652cf168bb5c3fe015002525d2cbf32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:add54594c2eefc0f1bbb0e5cbdad8592a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add54594c2eefc0f1bbb0e5cbdad8592a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>showEvent</b> (QShowEvent *ev)</td></tr>
+<tr class="memitem:add54594c2eefc0f1bbb0e5cbdad8592a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mainwindow.html#add54594c2eefc0f1bbb0e5cbdad8592a">showEvent</a> (QShowEvent *ev)</td></tr>
+<tr class="memdesc:add54594c2eefc0f1bbb0e5cbdad8592a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overridden showEvent function.  <a href="#add54594c2eefc0f1bbb0e5cbdad8592a">More...</a><br /></td></tr>
 <tr class="separator:add54594c2eefc0f1bbb0e5cbdad8592a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_mainwindow.html" title="Mainwindow class. ">Mainwindow</a> class. </p>
+<p>Manages all activities of main window. Is live whenever main window is open. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a3652cf168bb5c3fe015002525d2cbf32"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mainwindow::Mainwindow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_player.html">Player</a>&#160;</td>
+          <td class="paramname"><em>usr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>ip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for mainwindow. </p>
+<p>Sets up the UI, converts to window from dialog and initializes member varibles formm the passed arguments </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="add54594c2eefc0f1bbb0e5cbdad8592a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mainwindow::showEvent </td>
+          <td>(</td>
+          <td class="paramtype">QShowEvent *&#160;</td>
+          <td class="paramname"><em>ev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overridden showEvent function. </p>
+<p>Overridden showEvent function first calls its parent's showEvent function and then emitss SIGNAL window_loaded() </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>APVQuiz/<a class="el" href="mainwindow_8h_source.html">mainwindow.h</a></li>
-<li>APVQuiz/mainwindow.cpp</li>
+<li><a class="el" href="mainwindow_8h_source.html">mainwindow.h</a></li>
+<li><a class="el" href="mainwindow_8cpp.html">mainwindow.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

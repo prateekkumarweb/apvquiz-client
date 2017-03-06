@@ -1,3 +1,4 @@
-<map id="APVQuiz/firstwindow.h" name="APVQuiz/firstwindow.h">
-<area shape="rect" id="node2" href="$firstwindow_8cpp.html" title="manages the openning first window " alt="" coords="5,80,176,107"/>
+<map id="firstwindow.h" name="firstwindow.h">
+<area shape="rect" id="node2" href="$firstwindow_8cpp.html" title="manages the opening first window " alt="" coords="5,80,119,107"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="Contains main() " alt="" coords="143,80,218,107"/>
 </map>
