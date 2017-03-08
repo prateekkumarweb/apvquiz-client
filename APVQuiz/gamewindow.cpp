@@ -183,7 +183,7 @@ void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,Q
 void GameWindow::setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore)       //Part
 {
     /* Set up the question */
-    emit changeQuestionTextEdit(question);
+    emit changeQuestionTextEdit("Question " + QString::number(currentQuestionNumber) + "\n" + question);
 
     /* Set up the options */
     ui->option1PushButton->setText(option1);

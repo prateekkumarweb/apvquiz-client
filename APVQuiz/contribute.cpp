@@ -101,4 +101,11 @@ void Contribute::on_submitPushButton_clicked()
 
     /* Display utility message */
     ui->utiiltiyTextEdit->setText("Thanks for contributing to APV Quiz. ");
+
+    /* Clear all the feilds */
+    ui->questionTextEdit->setText("");
+    ui->option1LineEdit->setText("");
+    ui->option2LineEdit->setText("");
+    ui->option3LineEdit->setText("");
+    ui->option4LineEdit->setText("");
 }

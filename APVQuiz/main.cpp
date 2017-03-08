@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 
     /* Create an object of first window and then show it */
     FirstWindow w;
+    //w.setWindowFlags( Qt::WindowTitleHint |  Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::CustomizeWindowHint);
     w.show();
 
     /* Execute the application */

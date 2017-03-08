@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(222, 225, 229);</string>
+  </property>
   <widget class="QLineEdit" name="option1LineEdit">
    <property name="geometry">
     <rect>
@@ -21,6 +24,12 @@
      <width>631</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="option2LineEdit">
@@ -32,6 +41,12 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
   <widget class="QLineEdit" name="option3LineEdit">
    <property name="geometry">
@@ -41,6 +56,12 @@
      <width>631</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="option4LineEdit">
@@ -52,6 +73,12 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
   <widget class="QTextEdit" name="questionTextEdit">
    <property name="geometry">
@@ -61,6 +88,17 @@
      <width>631</width>
      <height>101</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+font: 13pt &quot;Ubuntu&quot;;</string>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="utiiltiyTextEdit">
@@ -73,17 +111,18 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: transparent;</string>
+    <string notr="true">background-color: transparent;
+font: 13pt &quot;Ubuntu&quot;;</string>
    </property>
    <property name="html">
     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enter your question, options, correct answer and topic in the boxes above. Your question will be verified and added to database.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Enter your question, options, correct answer and topic in the boxes above. Your question will be verified and added to database.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="submitPushButton">
    <property name="geometry">
     <rect>
      <x>280</x>
@@ -91,6 +130,9 @@ p, li { white-space: pre-wrap; }
      <width>89</width>
      <height>25</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 13pt &quot;Ubuntu&quot;;</string>
    </property>
    <property name="text">
     <string>Submit</string>
@@ -149,7 +191,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>option4LineEdit</tabstop>
   <tabstop>choiceComboBox</tabstop>
   <tabstop>subjectComboBox</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>submitPushButton</tabstop>
   <tabstop>utiiltiyTextEdit</tabstop>
  </tabstops>
  <resources/>

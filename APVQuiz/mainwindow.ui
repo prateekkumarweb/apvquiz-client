@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(222, 225, 229);</string>
+  </property>
   <widget class="QWidget" name="verticalWidget" native="true">
    <property name="geometry">
     <rect>
@@ -25,6 +28,9 @@
    <layout class="QVBoxLayout" name="boardVerticalLayout">
     <item>
      <widget class="QLabel" name="welocomeLabel">
+      <property name="styleSheet">
+       <string notr="true">font: 13pt &quot;Ubuntu&quot;;</string>
+      </property>
       <property name="text">
        <string>Hi </string>
       </property>
@@ -32,6 +38,9 @@
     </item>
     <item>
      <widget class="QLabel" name="gamesLabel">
+      <property name="styleSheet">
+       <string notr="true">font: 13pt &quot;Ubuntu&quot;;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -39,6 +48,9 @@
     </item>
     <item>
      <widget class="QLabel" name="pointsLabel">
+      <property name="styleSheet">
+       <string notr="true">font: 13pt &quot;Ubuntu&quot;;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -46,6 +58,9 @@
     </item>
     <item>
      <widget class="QLabel" name="contriLabel">
+      <property name="styleSheet">
+       <string notr="true">font: 13pt &quot;Ubuntu&quot;;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -53,6 +68,9 @@
     </item>
     <item>
      <widget class="QPushButton" name="contributePushButton">
+      <property name="styleSheet">
+       <string notr="true">font: 13pt &quot;Ubuntu&quot;;</string>
+      </property>
       <property name="text">
        <string>Contribute</string>
       </property>

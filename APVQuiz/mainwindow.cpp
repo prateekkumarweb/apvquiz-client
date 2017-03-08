@@ -237,7 +237,7 @@ void Mainwindow::on_moviesPushButton_clicked()
  */
 void Mainwindow::on_computersPushButton_clicked()
 {
-    startGame("computerscience");
+    startGame("computers");
 }
 
 /**
@@ -292,5 +292,5 @@ void Mainwindow::on_contributePushButton_clicked()
     cw->exec();
 
     /* After contribution update the board again */
-    updateBoard();
+    //updateBoard();
 }
