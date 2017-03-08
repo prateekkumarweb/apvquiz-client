@@ -30,7 +30,7 @@ public:
     /**
      * @brief Constructor for firstwindow
      *
-     * Sets up the UI and some initial set up
+     * Sets up the UI and does some initial set up
      */
     explicit Contribute(Player usr, QString ipaddress,QWidget *parent = 0);
     ~Contribute();

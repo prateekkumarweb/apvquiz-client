@@ -56,7 +56,7 @@ Mainwindow::~Mainwindow()
 void Mainwindow::on_windowLoaded()
 {
     /* Set the player name */
-    ui->welocomeLabel->setText(ui->welocomeLabel->text() + plr.getPlayerName());
+    ui->welocomeLabel->setText(ui->welocomeLabel->text() + plr.getPlayerName() + "!!");
 
     /* Strat a thread that sets up the pictures */
     std::thread forPics(&Mainwindow::setPics,this);

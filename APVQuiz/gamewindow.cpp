@@ -39,8 +39,9 @@ GameWindow::GameWindow(Player usr, QString sub, QString ip, QWidget *parent) :
     /* Instantiate timer */
     timer = new QTimer(this);
 
-    /* Initialize currentQuestionNumber with 0 */
+    /* Initialize currentQuestionNumber with 0 and finalScoreRecieved with false */
     currentQuestionNumber = 0;
+    finalScoreRecieved = false;
 
     /* Connect the signal window_loaded() to the SLOT on_windowLoaded() */
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
@@ -399,6 +400,9 @@ void GameWindow::onWebSocketRead(QString message)
         else {
             //qDebug() << "message" << message;
 
+            /* Set finalScoreRecieved to true */
+            finalScoreRecieved = true;
+
             /* Declare variables */
             QString ownScore, player1Name, player1Score, player2Name, player2Score;
 
@@ -435,7 +439,7 @@ void GameWindow::onWebSocketRead(QString message)
             forUpdatingBoard.join();
         }
     }
-    else if (currentQuestionNumber < 6){
+    else if (!finalScoreRecieved){
         /*In case the questions are not over but some opponent left the game */
 
         /*Stop the timer*/

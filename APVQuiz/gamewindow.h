@@ -93,6 +93,7 @@ private:
     int correctAnswer; //!< An int for correct answer
     QString ipServer; //!< A string for ip
     QWebSocket webSocket; //!< A websocket for communication
+    bool finalScoreRecieved; //!< A boolean to check if final score recieved
 };
 
 #endif // GAMEWINDOW_H

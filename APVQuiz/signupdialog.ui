@@ -13,18 +13,27 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(222, 225, 229);</string>
+  </property>
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
      <x>270</x>
      <y>190</y>
      <width>371</width>
-     <height>451</height>
+     <height>171</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(64, 69, 79);</string>
    </property>
    <layout class="QFormLayout" name="formLayout">
     <item row="1" column="0">
      <widget class="QLabel" name="usernameLabel">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(64, 69, 79);</string>
+      </property>
       <property name="text">
        <string>Username</string>
       </property>
@@ -38,6 +47,9 @@
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="passwordLabel">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(64, 69, 79);</string>
+      </property>
       <property name="text">
        <string>Password</string>
       </property>
@@ -55,6 +67,9 @@
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="confirmPasswordLabel">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(64, 69, 79);</string>
+      </property>
       <property name="text">
        <string>Confirm Password</string>
       </property>
@@ -72,6 +87,9 @@
     </item>
     <item row="4" column="0">
      <widget class="QLabel" name="ipLabel">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(64, 69, 79);</string>
+      </property>
       <property name="text">
        <string>Ip</string>
       </property>
@@ -79,6 +97,9 @@
     </item>
     <item row="6" column="0" colspan="2">
      <widget class="QPushButton" name="continuePushButton">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(64, 69, 79);</string>
+      </property>
       <property name="text">
        <string>Continue</string>
       </property>
@@ -88,6 +109,56 @@
      <widget class="QLineEdit" name="ipLineEdit"/>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>100</y>
+     <width>291</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 50pt &quot;Ubuntu&quot;;
+background-color: rgb(81, 88, 99);
+color: rgb(255,255,255);</string>
+   </property>
+   <property name="text">
+    <string>APV Quiz</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>100</y>
+     <width>301</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(81, 88, 99);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>100</y>
+     <width>371</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(81, 88, 99);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <tabstops>
