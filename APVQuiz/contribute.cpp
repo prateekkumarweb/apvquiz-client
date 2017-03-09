@@ -45,16 +45,27 @@ Contribute::Contribute(Player usr, QString ipaddress, QWidget *parent) :
     ui->subjectComboBox->addItem("Trivia");
     ui->subjectComboBox->addItem("Sports");
 
-    /*I(nitialize the member variables */
+    /*Initialize the member variables */
     plr = usr;
     ip = ipaddress;
 }
 
+/**
+ *@brief Destructor for contribute dialog
+ *
+ * Ends the dialog
+ */
 Contribute::~Contribute()
 {
+    /*Delete the UI */
     delete ui;
 }
 
+/**
+ * @brief Slot for Push Button clicked
+ *
+ * Submits the all the filled data to server
+ */
 void Contribute::on_submitPushButton_clicked()
 {
 
@@ -97,7 +108,6 @@ void Contribute::on_submitPushButton_clicked()
     /* Convert the obtained bytearray to Json Object to parse */
     QJsonDocument jsonReply = QJsonDocument::fromJson(byteReply);
     QJsonObject replyObject = jsonReply.object();
-    //qDebug() << replyObject;
 
     /* Display utility message */
     ui->utiiltiyTextEdit->setText("Thanks for contributing to APV Quiz. ");

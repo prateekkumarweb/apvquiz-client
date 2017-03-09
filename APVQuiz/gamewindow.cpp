@@ -65,6 +65,7 @@ GameWindow::GameWindow(Player usr, QString sub, QString ip, QWidget *parent) :
  */
 GameWindow::~GameWindow()
 {
+    /*Delete the UI */
     delete ui;
 }
 
@@ -165,9 +166,9 @@ void GameWindow::enableOptionButtons()                                          
  * Responsible for updating the opponents board
  * using the parameters passed
  */
-void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,QString player2Name,QString player2Score)                            //Part
+void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,QString player2Name,QString player2Score)
 {
-    /*Set up the usernaame and score of the 2 opponents */
+    /*Set up the username and score of the 2 opponents */
     ui->opponent1NameLabel->setText(player1Name);
     ui->opponent1Scorelabel->setText(player1Score);
     ui->opponent2NameLabel->setText(player2Name);
@@ -180,7 +181,7 @@ void GameWindow::updateOpponentsBoard(QString player1Name,QString player1Score,Q
  * Responsible for setting up the question and and options
  * using the parameters passed
  */
-void GameWindow::setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore)       //Part
+void GameWindow::setupQuestionAnswer(QString question, QString option1, QString option2, QString option3, QString option4, QString ownScore)
 {
     /* Set up the question */
     emit changeQuestionTextEdit("Question " + QString::number(currentQuestionNumber) + "\n" + question);
@@ -201,7 +202,8 @@ void GameWindow::setupQuestionAnswer(QString question, QString option1, QString 
 /**
  * @brief Function to send the selected choice and time to server
  *
- * Responsible for sending the selected choice and time to server
+ * Responsible for sending wether user clicked correct answer (@param isCorrect)
+ * and time to server (@param timeOfAnswer)
  */
 void GameWindow::sendChoiceToServer(bool isCorrect, QString timeOfAnswer)
 {
@@ -213,7 +215,7 @@ void GameWindow::sendChoiceToServer(bool isCorrect, QString timeOfAnswer)
 /**
  * @brief Function to check the selected choice
  *
- * Responsible for checking the selected choice
+ * Responsible for checking the selected @param choice
  */
 void GameWindow::checkSelectedChoice(int choice)
 {
@@ -278,7 +280,7 @@ void GameWindow::handleButtonClicked(int buttonNumber)
     /*Join with the thread that was disbling buttonss */
     forDisablingButtons.join();
 
-    /*Join with the threaad thaat was checking the clicked option */
+    /*Join with the thread that was checking the clicked option */
     forChecking.join();
 }
 
@@ -338,7 +340,8 @@ void GameWindow::webSocketDisconnected()
  */
 void GameWindow::onWebSocketRead(QString message)
 {
-    qDebug() << "message" << message;
+    //qDebug() << "message" << message;
+
     /* Increment currentQuestionNumber */
     currentQuestionNumber++;
 
@@ -368,22 +371,17 @@ void GameWindow::onWebSocketRead(QString message)
             player2Name = rx.cap(10);
             player2Score = rx.cap(11);
 
-            /* Start a thread that enables the option buttons */
-            //std::thread forEnablingButtons(&GameWindow::enableOptionButtons, this);
-
-            enableOptionButtons();
-
             /*Start a thread that updates the Opponents' board */
             std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
 
             /*Meanwhile on the parent thread setup the question, options and the score */
             setupQuestionAnswer(question, option1, option2, option3, option4, ownScore);
 
+            /*Let the parent thread enable the option buttons until the child thread finishes */
+            enableOptionButtons();
+
             /* Set the member variable */
             correctAnswer = correctOption.toInt();
-
-            /*Wait for the thread that enabled buttons to complete */
-            //forEnablingButtons.join();
 
             /* Wait for the thread that updated the opponents board to complete */
             forUpdatingBoard.join();
@@ -398,8 +396,6 @@ void GameWindow::onWebSocketRead(QString message)
             timer->start(1000);
         }
         else {
-            //qDebug() << "message" << message;
-
             /* Set finalScoreRecieved to true */
             finalScoreRecieved = true;
 
@@ -417,10 +413,10 @@ void GameWindow::onWebSocketRead(QString message)
             player2Name = rx.cap(4);
             player2Score = rx.cap(5);
 
-            /*Start a thread that updates the Opponents' board */
-            std::thread forUpdatingBoard(&GameWindow::updateOpponentsBoard,this,player1Name, player1Score, player2Name, player2Score);
+            /* Update the opponents board with fnal score */
+            updateOpponentsBoard(player1Name, player1Score, player2Name, player2Score);
 
-            /*Meanwhile on the parent thread compare own scrore with opponents' and displaay the final result */
+            /*Compare own scrore with opponents' and displaay the final result */
             ui->scoreLabel->setText(ownScore);
             if(ownScore.toInt() >= player1Score.toInt() && ownScore.toInt() >= player2Score.toInt()){
                 /* User stands first */
@@ -434,9 +430,6 @@ void GameWindow::onWebSocketRead(QString message)
                 /* User stands second */
                 ui->utilityLabel->setText("Congratulations you stood second, with final score "+ownScore);
             }
-
-            /* Wait for the thread that updated the opponents board to complete */
-            forUpdatingBoard.join();
         }
     }
     else if (!finalScoreRecieved){
@@ -449,7 +442,7 @@ void GameWindow::onWebSocketRead(QString message)
         disableOptionButtons();
 
         /* Display utility message */
-        ui->utilityLabel->setText("Sorry ... Your opponent has left the quiz. We will add your current points to your total. ");
+        ui->utilityLabel->setText("Sorry ... Your opponent has left the quiz. ");
     }
 }
 
@@ -460,6 +453,7 @@ void GameWindow::onWebSocketRead(QString message)
  */
 void GameWindow::on_option1PushButton_clicked()
 {
+    /* Call the function to handle button click */
     handleButtonClicked(1);
 }
 
@@ -470,6 +464,7 @@ void GameWindow::on_option1PushButton_clicked()
  */
 void GameWindow::on_option2PushButton_clicked()
 {
+    /* Call the function to handle button click */
     handleButtonClicked(2);
 }
 
@@ -480,6 +475,7 @@ void GameWindow::on_option2PushButton_clicked()
  */
 void GameWindow::on_option3PushButton_clicked()
 {
+    /* Call the function to handle button click */
     handleButtonClicked(3);
 }
 
@@ -490,6 +486,7 @@ void GameWindow::on_option3PushButton_clicked()
  */
 void GameWindow::on_option4PushButton_clicked()
 {
+    /* Call the function to handle button click */
     handleButtonClicked(4);
 }
 
@@ -502,7 +499,6 @@ void GameWindow::on_option4PushButton_clicked()
  */
 void GameWindow::reject()
 {
-    qDebug() << "Closing app rej";
 
     /* Close the websocket*/
     webSocket.close();
@@ -511,4 +507,3 @@ void GameWindow::reject()
     QDialog::reject();
 }
 
-// 2 + (1+1)

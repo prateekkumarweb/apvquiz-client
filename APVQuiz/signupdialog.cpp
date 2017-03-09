@@ -25,8 +25,14 @@ SignUpDialog::SignUpDialog( QWidget *parent) :
     ui->setupUi(this);
 }
 
+/**
+ * @brief Destructor for signup dialog
+ *
+ * Deletes the UI
+ */
 SignUpDialog::~SignUpDialog()
 {
+    /*Delete the UI */
     delete ui;
 }
 
@@ -54,7 +60,7 @@ void SignUpDialog::on_continuePushButton_clicked()
         QUrlQuery postData;
         postData.addQueryItem("username", username);
         postData.addQueryItem("password", password);
-\
+
         /*Connect to server*/
         QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
@@ -85,6 +91,7 @@ void SignUpDialog::on_continuePushButton_clicked()
             Player p(username,password);
             hide();
             mw = new Mainwindow(p,ip);
+            mw->setFixedSize(954,640);
             mw->exec();
         } else {
             /* In case server replies problematic credentials, report the error */

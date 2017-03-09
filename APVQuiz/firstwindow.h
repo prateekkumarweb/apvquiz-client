@@ -33,6 +33,12 @@ public:
      * Sets up the UI
      */
     explicit FirstWindow( QWidget *parent = 0);
+
+    /**
+     *@brief Destructor for first window
+     *
+     * Ends the window (Destroys the UI)
+     */
     ~FirstWindow();
 
 private slots:

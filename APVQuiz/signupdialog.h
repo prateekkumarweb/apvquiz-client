@@ -16,7 +16,7 @@ class SignUpDialog;
 }
 
 /**
- * @brief SignUpDiaalog class.
+ * @brief SignUpDialog class.
  *
  * Manages all activities of sign up dialog. Is live whenever sign up dialog is open.
  */
@@ -31,6 +31,12 @@ public:
      * Sets up the UI
      */
     explicit SignUpDialog(QWidget *parent = 0);
+
+    /**
+     * @brief Destructor for signup dialog
+     *
+     * Deletes the UI
+     */
     ~SignUpDialog();
 
 private slots:

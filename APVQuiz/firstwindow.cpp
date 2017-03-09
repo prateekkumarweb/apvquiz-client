@@ -27,8 +27,14 @@ FirstWindow::FirstWindow( QWidget *parent) :
     ui->setupUi(this);
 }
 
+/**
+ *@brief Destructor for first window
+ *
+ * Ends the window (Destroys the UI)
+ */
 FirstWindow::~FirstWindow()
 {
+    /*Destroy the UI */
     delete ui;
 }
 
@@ -82,6 +88,7 @@ void FirstWindow::on_loginPushButton_clicked()
         Player p(username,password);
         hide();
         mw = new Mainwindow(p,ip);
+        mw->setFixedSize(954,640);
         mw->exec();
     } else{
         /* In case server replies invalid credentials, report the error */
@@ -96,11 +103,10 @@ void FirstWindow::on_loginPushButton_clicked()
  */
 void FirstWindow::on_signUpPushButton_clicked()
 {
-    /* Create the sign up dialog and hide the current first window */
+    /* Create the sign up dialog, set its size, execute and hide the current first window */
     hide();
     sd = new SignUpDialog();
+    sd->setFixedSize(942,641);
     sd->exec();
 
 }
-//abc 1
-//user pass

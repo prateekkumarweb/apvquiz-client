@@ -27,13 +27,26 @@ class Mainwindow : public QDialog
 {
     Q_OBJECT
 
+public:
+    /**
+     * @brief Constructor for mainwindow
+     *
+     * Sets up the UI, converts to window from dialog
+     * and initializes member varibles formm the passed arguments
+     */
+    explicit Mainwindow(Player usr, QString ip,QWidget *parent = 0);
+
+    /**
+     * @brief Destructor for mainwindow
+     *
+     * Deletes the UI
+     */
+    ~Mainwindow();
+
+
     /* Documentation for each of the function can be obtained in the
      * corresponding mainwindow.cpp. The header contains all declaration.
      */
-
-public:
-    explicit Mainwindow(Player usr, QString ip,QWidget *parent = 0);
-    ~Mainwindow();
 
 private slots:
     void on_harryPotterPushButton_clicked();

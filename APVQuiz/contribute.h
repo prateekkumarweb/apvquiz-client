@@ -28,11 +28,17 @@ class Contribute : public QDialog
 
 public:
     /**
-     * @brief Constructor for firstwindow
+     * @brief Constructor for contribute dialog
      *
      * Sets up the UI and does some initial set up
      */
     explicit Contribute(Player usr, QString ipaddress,QWidget *parent = 0);
+
+    /**
+     *@brief Destructor for contribute dialog
+     *
+     * Ends the dialog
+     */
     ~Contribute();
 
 private slots:

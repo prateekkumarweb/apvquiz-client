@@ -42,8 +42,14 @@ Mainwindow::Mainwindow(Player usr, QString ip, QWidget *parent) :
     connect(this, SIGNAL(window_loaded()), this, SLOT(on_windowLoaded()));
 }
 
+/**
+ * @brief Destructor for mainwindow
+ *
+ * Deletes the UI
+ */
 Mainwindow::~Mainwindow()
 {
+    /*Delete the UI */
     delete ui;
 }
 
@@ -166,8 +172,9 @@ void Mainwindow::setPics()
  */
 void Mainwindow::startGame(QString subject)
 {
-    /* Start the game window */
+    /* Create the gamewindow, set its size and execute */
     gw = new GameWindow(plr,subject, ipaddress);
+    gw->setFixedSize(902,602);
     gw->exec();
 
     /* When the game ends update the board again */

@@ -1,10 +1,10 @@
-<map id="gamewindow.h" name="gamewindow.h">
-<area shape="rect" id="node2" href="$mainwindow_8h.html" title="manages the openning main window " alt="" coords="159,80,264,107"/>
-<area shape="rect" id="node9" href="$gamewindow_8cpp.html" title="manages the opening game window " alt="" coords="289,80,411,107"/>
-<area shape="rect" id="node3" href="$signupdialog_8h.html" title="manages the openning first window " alt="" coords="159,155,264,181"/>
-<area shape="rect" id="node4" href="$firstwindow_8h.html" title="manages the openning first window " alt="" coords="71,229,170,256"/>
-<area shape="rect" id="node8" href="$mainwindow_8cpp.html" title="manages the opening main window " alt="" coords="288,155,407,181"/>
-<area shape="rect" id="node7" href="$signupdialog_8cpp.html" title="manages the openning sign up dialog " alt="" coords="195,229,313,256"/>
-<area shape="rect" id="node5" href="$firstwindow_8cpp.html" title="manages the opening first window " alt="" coords="5,304,119,331"/>
-<area shape="rect" id="node6" href="$main_8cpp.html" title="Contains main() " alt="" coords="143,304,218,331"/>
+<map id="APVQuiz/gamewindow.h" name="APVQuiz/gamewindow.h">
+<area shape="rect" id="node2" href="$mainwindow_8h.html" title="manages the openning main window " alt="" coords="216,80,379,107"/>
+<area shape="rect" id="node9" href="$gamewindow_8cpp.html" title="manages the opening game window " alt="" coords="403,80,584,107"/>
+<area shape="rect" id="node3" href="$signupdialog_8h.html" title="manages the openning first window " alt="" coords="216,155,379,181"/>
+<area shape="rect" id="node4" href="$firstwindow_8h.html" title="manages the openning first window " alt="" coords="100,229,257,256"/>
+<area shape="rect" id="node8" href="$mainwindow_8cpp.html" title="manages the opening main window " alt="" coords="403,155,581,181"/>
+<area shape="rect" id="node7" href="$signupdialog_8cpp.html" title="manages the openning sign up dialog " alt="" coords="282,229,459,256"/>
+<area shape="rect" id="node5" href="$firstwindow_8cpp.html" title="manages the opening first window " alt="" coords="5,304,176,331"/>
+<area shape="rect" id="node6" href="$main_8cpp.html" title="Contains main() " alt="" coords="200,304,333,331"/>
 </map>

@@ -29,13 +29,28 @@ class GameWindow : public QDialog
 {
     Q_OBJECT
 
+
+public:
+    /**
+     * @brief Constructor for gamewindow
+     *
+     * Sets up the UI,
+     * initializes member varibles formm the passed arguments
+     * and connects signals to slots
+     */
+    explicit GameWindow(Player usr, QString sub, QString ip, QWidget *parent = 0);
+
+    /**
+     *@brief Destructor for game window
+     *
+     * Ends the window (Destroys the UI)
+     */
+    ~GameWindow();
+
+
     /* Documentation for each of the function can be obtained in the
      * corresponding mainwindow.cpp. The header contains all declaration.
      */
-
-public:
-    explicit GameWindow(Player usr, QString sub, QString ip, QWidget *parent = 0);
-    ~GameWindow();
 
 private slots:
     void on_windowLoaded();

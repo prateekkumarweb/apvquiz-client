@@ -1,8 +1,8 @@
-<map id="mainwindow.h" name="mainwindow.h">
-<area shape="rect" id="node2" href="$signupdialog_8h.html" title="manages the openning first window " alt="" coords="159,80,264,107"/>
-<area shape="rect" id="node3" href="$firstwindow_8h.html" title="manages the openning first window " alt="" coords="71,155,170,181"/>
-<area shape="rect" id="node7" href="$mainwindow_8cpp.html" title="manages the opening main window " alt="" coords="288,80,407,107"/>
-<area shape="rect" id="node6" href="$signupdialog_8cpp.html" title="manages the openning sign up dialog " alt="" coords="195,155,313,181"/>
-<area shape="rect" id="node4" href="$firstwindow_8cpp.html" title="manages the opening first window " alt="" coords="5,229,119,256"/>
-<area shape="rect" id="node5" href="$main_8cpp.html" title="Contains main() " alt="" coords="143,229,218,256"/>
+<map id="APVQuiz/mainwindow.h" name="APVQuiz/mainwindow.h">
+<area shape="rect" id="node2" href="$signupdialog_8h.html" title="manages the openning first window " alt="" coords="216,80,379,107"/>
+<area shape="rect" id="node3" href="$firstwindow_8h.html" title="manages the openning first window " alt="" coords="100,155,257,181"/>
+<area shape="rect" id="node7" href="$mainwindow_8cpp.html" title="manages the opening main window " alt="" coords="403,80,581,107"/>
+<area shape="rect" id="node6" href="$signupdialog_8cpp.html" title="manages the openning sign up dialog " alt="" coords="282,155,459,181"/>
+<area shape="rect" id="node4" href="$firstwindow_8cpp.html" title="manages the opening first window " alt="" coords="5,229,176,256"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="Contains main() " alt="" coords="200,229,333,256"/>
 </map>

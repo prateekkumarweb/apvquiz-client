@@ -144,9 +144,7 @@
      <string notr="true">font: 50pt &quot;Ubuntu&quot;;
 background-color: rgb(81, 88, 99);
 color: rgb(255,255,255);
-text-align: right;
-qProperty-alignment: 'AlignVCenter | AlignLeft';
-qProperty-Wordwrap: true;</string>
+text-align: right;</string>
     </property>
     <property name="text">
      <string>APV Quiz</string>

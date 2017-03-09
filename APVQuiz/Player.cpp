@@ -24,6 +24,14 @@ Player::Player()
 }
 
 /**
+ * @brief Destructor for Player
+ */
+Player::~Player()
+{
+
+}
+
+/**
  * @brief Function to get the player name
  *
  * @return Returns the username of the player

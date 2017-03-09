@@ -1,5 +1,5 @@
 /**
- * @file player.h
+ * @file Player.h
  * @author Vaibhav
  * @date 5 Mar 2017
  * @brief Manages player
@@ -36,6 +36,11 @@ public:
      * Empty constructor
      */
     Player();
+
+    /**
+     * @brief Destructor for Player
+     */
+    ~Player();
 
     /**
      * @brief Function to get the player name
